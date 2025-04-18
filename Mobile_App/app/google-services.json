@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "350685026683",
+    "project_id": "electionnew-app",
+    "storage_bucket": "electionnew-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350685026683:android:579bc0c7462ccb5d0985de",
+        "android_client_info": {
+          "package_name": "com.example.electionapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoNPjvb_70FpbF8rs79tx3YeA9rud7YU8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

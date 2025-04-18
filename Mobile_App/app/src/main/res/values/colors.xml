@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="purple">#8692f7</color>
+    <color name="gray">#696969</color>
+    <color name="red">#FF0000</color>
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorVoted">#9E9E9E</color>
+    <color name="colorDisabled">#B0B0B0</color> <!-- Replace with your disabled button color -->
+<!-- Replace with your primary button color -->
+    <color name="colorPrimaryDark">#C80808</color> <!-- Replace with your dark primary color (pressed state) -->
+    <color name="colorPrimaryLight">#FF4081</color> <!-- Replace with your light primary color (focused state) -->
+
+
+
+</resources>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#FFFFFF"
+    android:gravity="center">
+
+    <!-- Election Title -->
+    <TextView
+        android:id="@+id/textViewElectionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Election Details"
+        android:textColor="#333333"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="12dp"/>
+
+    <!-- Vote Button -->
+    <Button
+        android:id="@+id/buttonVote123"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Vote"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+       android:backgroundTint="@color/purple"
+        android:elevation="4dp"
+        android:layout_marginBottom="12dp"/>
+
+    <!-- Result Button -->
+    <Button
+        android:id="@+id/buttonResult"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Result"
+        android:backgroundTint="@color/purple"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+
+        android:elevation="4dp"/>
+</LinearLayout>

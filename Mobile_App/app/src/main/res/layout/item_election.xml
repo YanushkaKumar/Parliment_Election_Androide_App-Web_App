@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="12dp"
+    app:strokeColor="@color/purple"
+    app:strokeWidth="3dp"
+    app:rippleColor="?attr/colorPrimary"
+    android:textAlignment="center"
+    tools:context=".ElectionAdapter">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center"> <!-- Ensures content inside LinearLayout is centered -->
+
+        <TextView
+            android:id="@+id/tvElectionItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:gravity="center" /> <!-- Centers the text within the TextView -->
+
+        <!-- Divider between name and date -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="12dp" /> <!-- Optional, ensures divider is centered -->
+
+        <TextView
+            android:id="@+id/tvElectionItemDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:layout_marginTop="4dp"
+            android:gravity="center" /> <!-- Centers the text within the TextView -->
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
