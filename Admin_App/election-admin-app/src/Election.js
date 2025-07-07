@@ -45,35 +45,44 @@ function Election() {
     }
   };
 
-  return (
+    return (
     <div>
       {/* Election Form */}
-      <form onSubmit={handleElectionSubmit}>
+      <form onSubmit={handleElectionSubmit} className="form-container">
         <h2 className="form-title">Add Election</h2>
 
-        <div className="form-group">
-          <label>Enter Election Name</label>
-          <input 
-            type="text" 
-            value={electionData.name}
-            onChange={(e) => setElectionData({...electionData, name: e.target.value})}
-            required
-          />
+        <div className="form-grid">
+          <div className="form-group">
+            <label className="form-label">Enter Election Name</label>
+            <input 
+              type="text" 
+              className="form-input"
+              value={electionData.name}
+              onChange={(e) => setElectionData({...electionData, name: e.target.value})}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Enter Election Date</label>
+            <input 
+              type="date"
+              className="form-input" 
+              value={electionData.date}
+              onChange={(e) => setElectionData({...electionData, date: e.target.value})}
+              required
+            />
+          </div>
         </div>
 
-        <div className="form-group">
-          <label>Enter Election Date</label>
-          <input 
-            type="date" 
-            value={electionData.date}
-            onChange={(e) => setElectionData({...electionData, date: e.target.value})}
-            required
-          />
+
+        <div className="form-buttons" style={{ justifyContent: 'center' }}>
+          {/* Add an inline style to the button to override the flex-grow property */}
+          <button type="submit" className="submit-button" style={{ flex: 'none' }}>
+            Submit Election
+          </button>
         </div>
 
-        <button type="submit" className="submit-button">
-          Submit Election
-        </button>
       </form>
 
       {/* Election List */}

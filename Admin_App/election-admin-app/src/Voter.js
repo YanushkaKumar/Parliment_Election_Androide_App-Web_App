@@ -127,81 +127,96 @@ function Voter() {
   return (
     <div>
       {/* Voter Form */}
-      <form onSubmit={handleVoterSubmit}>
+      <form onSubmit={handleVoterSubmit} className="form-container"> {/* ADD className here */}
         <h2 className="form-title">
           {isEditing ? 'Update Voter' : 'Add Voter'}
         </h2>
 
-        <div className="form-group">
-          <label>Enter NIC Number</label>
-          <input 
-            type="text" 
-            value={voterData.nic}
-            onChange={(e) => setVoterData({...voterData, nic: e.target.value})}
-            required
-          />
-        </div>
+        {/* WRAP fields in a div with className="form-grid" */}
+        <div className="form-grid">
+          <div className="form-group">
+            <label className="form-label">Enter NIC Number</label> {/* Use form-label class for consistency */}
+            <input 
+              type="text" 
+              className="form-input"
+              value={voterData.nic}
+              onChange={(e) => setVoterData({...voterData, nic: e.target.value})}
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Enter Voter Name</label>
-          <input 
-            type="text" 
-            value={voterData.name}
-            onChange={(e) => setVoterData({...voterData, name: e.target.value})}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label className="form-label">Enter Voter Name</label>
+            <input 
+              type="text" 
+              className="form-input"
+              value={voterData.name}
+              onChange={(e) => setVoterData({...voterData, name: e.target.value})}
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Enter Voter Email</label>
-          <input 
-            type="email" 
-            value={voterData.email}
-            onChange={(e) => setVoterData({...voterData, email: e.target.value})}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label className="form-label">Enter Voter Email</label>
+            <input 
+              type="email" 
+              className="form-input"
+              value={voterData.email}
+              onChange={(e) => setVoterData({...voterData, email: e.target.value})}
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Enter Voter Address</label>
-          <textarea 
-            value={voterData.address}
-            onChange={(e) => setVoterData({...voterData, address: e.target.value})}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <select 
+              className="form-select"
+              value={voterData.district}
+              onChange={(e) => setVoterData({...voterData, district: e.target.value})}
+              required
+              /* Use form-select class */
+            >
+              <option value="">Select a district</option>
+              {districts.map((district, index) => (
+                <option key={index} value={district}>{district}</option>
+              ))}
+            </select>
+          </div>
 
-        <div className="form-group">
-          <label>Select District</label>
-          <select 
-            value={voterData.district}
-            onChange={(e) => setVoterData({...voterData, district: e.target.value})}
-            required
-          >
-            <option value="">Select a district</option>
-            {districts.map((district, index) => (
-              <option key={index} value={district}>{district}</option>
-            ))}
-          </select>
-        </div>
+          <div className="form-group">
+            <label className="form-label">Enter Constituency</label>
+            <input 
+              type="text" 
+              className="form-input"
+              value={voterData.constituency}
+              onChange={(e) => setVoterData({...voterData, constituency: e.target.value})}
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Enter Constituency</label>
-          <input 
-            type="text" 
-            value={voterData.constituency}
-            onChange={(e) => setVoterData({...voterData, constituency: e.target.value})}
-            required
-          />
-        </div>
+          {/* This field can span two columns if needed, but for now it's in the grid */}
+          <div className="form-group">
+            <label className="form-label">Enter Voter Address</label>
+            <textarea 
+              value={voterData.address}
+              onChange={(e) => setVoterData({...voterData, address: e.target.value})}
+              required
+            />
+          </div>
+        </div> {/* END of form-grid */}
 
-        <div className="form-buttons">
+ <div 
+          className="form-buttons" 
+          style={!isEditing ? { justifyContent: 'center' } : {}}
+        >
           <button 
             type="submit" 
-            className="submit-button"
+            className="submit-button" 
             disabled={loading}
+            // This style is applied only when the button is by itself
+            style={!isEditing ? { flex: 'none' } : {}}
           >
-            {loading ? 'Processing...' : isEditing ? 'Update Voter' : 'Submit Voter'}
+            {loading ? 'Processing...' : isEditing ? 'Update Candidate' : 'Submit Candidate'}
+            {/* For Voter.js, the text will be 'Submit Voter' etc. The logic is the same. */}
           </button>
           
           {isEditing && (
@@ -256,3 +271,6 @@ function Voter() {
 }
 
 export default Voter;
+
+//done
+// Note: Make sure to add appropriate CSS styles for the classes used above

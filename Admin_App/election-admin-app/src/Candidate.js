@@ -273,132 +273,149 @@ function Candidate() {
   return (
     <div>
       {/* Candidate Form */}
-      <form onSubmit={handleCandidateSubmit}>
+      <form onSubmit={handleCandidateSubmit} className="form-container"> {/* ADD className here */}
         <h2 className="form-title">
           {isEditing ? 'Update Candidate' : 'Add Candidate'}
         </h2>
 
-        <div className="form-group">
-          <label>Enter Candidate ID</label>
-          <input 
-            type="text" 
-            value={candidateData.candidateId}
-            onChange={(e) => setCandidateData({...candidateData, candidateId: e.target.value})}
-            required
-          />
-        </div>
+        {/* WRAP fields in a div with className="form-grid" */}
+        <div className="form-grid">
+          <div className="form-group">
+            <label className="form-label">Enter Candidate ID</label>
+            <input 
+              type="text"
+              className="form-input"
+              value={candidateData.candidateId}
+              onChange={(e) => setCandidateData({...candidateData, candidateId: e.target.value})}
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Enter Candidate Name</label>
-          <input 
-            type="text" 
-            value={candidateData.candidateName}
-            onChange={(e) => setCandidateData({...candidateData, candidateName: e.target.value})}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label className="form-label">Enter Candidate Name</label>
+            <input 
+              type="text" 
+              className="form-input"
+              value={candidateData.candidateName}
+              onChange={(e) => setCandidateData({...candidateData, candidateName: e.target.value})}
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Enter Candidate Party</label>
-          <input 
-            type="text" 
-            value={candidateData.candidateParty}
-            onChange={(e) => setCandidateData({...candidateData, candidateParty: e.target.value})}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label className="form-label">Enter Candidate Party</label>
+            <input 
+              type="text" 
+              className="form-input"
+              value={candidateData.candidateParty}
+              onChange={(e) => setCandidateData({...candidateData, candidateParty: e.target.value})}
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Select District</label>
-          <select 
-            value={candidateData.district}
-            onChange={(e) => setCandidateData({...candidateData, district: e.target.value})}
-            required
-          >
-            <option value="">Select a district</option>
-            {districts.map((district, index) => (
-              <option key={index} value={district}>{district}</option>
-            ))}
-          </select>
-        </div>
+          <div className="form-group">
+            <label className="form-label">Select District</label>
+            <select 
+              className="form-select"
+              value={candidateData.district}
+              onChange={(e) => setCandidateData({...candidateData, district: e.target.value})}
+              required
+            >
+              <option value="">Select a district</option>
+              {districts.map((district, index) => (
+                <option key={index} value={district}>{district}</option>
+              ))}
+            </select>
+          </div>
 
-        <div className="form-group">
-          <label>Enter Constituency</label>
-          <input 
-            type="text" 
-            value={candidateData.constituency}
-            onChange={(e) => setCandidateData({...candidateData, constituency: e.target.value})}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label className="form-label">Enter Constituency</label>
+            <input 
+              type="text" 
+              className="form-input"
+              value={candidateData.constituency}
+              onChange={(e) => setCandidateData({...candidateData, constituency: e.target.value})}
+              required
+            />
+          </div>
 
-        <div className="form-group">
-          <label>Select Election</label>
-          <select 
-            value={candidateData.electionName}
-            onChange={(e) => setCandidateData({...candidateData, electionName: e.target.value})}
-            required
-          >
-            <option value="">Select an election</option>
-            {elections.map((election) => (
-              <option key={election.id} value={election.name}>{election.name}</option>
-            ))}
-          </select>
-        </div>
+          <div className="form-group">
+            <label className="form-label">Select Election</label>
+            <select 
+              className="form-select"
+              value={candidateData.electionName}
+              onChange={(e) => setCandidateData({...candidateData, electionName: e.target.value})}
+              required
+            >
+              <option value="">Select an election</option>
+              {elections.map((election) => (
+                <option key={election.id} value={election.name}>{election.name}</option>
+              ))}
+            </select>
+          </div>
 
-        {/* Candidate Photo Upload */}
-        <div className="form-group">
-          <label>
-            {isEditing ? 'Update Candidate Photo (optional)' : 'Upload Candidate Photo (will be compressed)'}
-          </label>
-          <input 
-            ref={photoInputRef}
-            type="file"
-            accept="image/*"
-            onChange={handleCandidatePhotoChange}
-            required={!isEditing && !photoPreview}
-          />
-          {photoPreview && (
-            <div className="image-preview">
-              <img 
-                src={photoPreview} 
-                alt="Candidate preview" 
-                style={{ width: '100px', height: '100px', objectFit: 'cover' }} 
-              />
-            </div>
-          )}
-        </div>
+          {/* Candidate Photo Upload */}
+          <div className="form-group">
+            <label className="form-label">
+              {isEditing ? 'Update Candidate Photo (optional)' : 'Upload Candidate Photo'}
+            </label>
+            <input 
+              ref={photoInputRef}
+              type="file"
+              className="form-input" /* Use form-input for consistent styling */
+              accept="image/*"
+              onChange={handleCandidatePhotoChange}
+              required={!isEditing && !photoPreview}
+            />
+            {photoPreview && (
+              <div className="image-preview">
+                <img 
+                  src={photoPreview} 
+                  alt="Candidate preview" 
+                  style={{ width: '100px', height: '100px', objectFit: 'cover' }} 
+                />
+              </div>
+            )}
+          </div>
 
-        {/* Party Symbol Upload */}
-        <div className="form-group">
-          <label>
-            {isEditing ? 'Update Party Symbol (optional)' : 'Upload Party Symbol (will be compressed)'}
-          </label>
-          <input 
-            ref={symbolInputRef}
-            type="file"
-            accept="image/*"
-            onChange={handlePartySymbolChange}
-            required={!isEditing && !symbolPreview}
-          />
-          {symbolPreview && (
-            <div className="image-preview">
-              <img 
-                src={symbolPreview} 
-                alt="Party symbol preview" 
-                style={{ width: '100px', height: '100px', objectFit: 'cover' }} 
-              />
-            </div>
-          )}
-        </div>
+          {/* Party Symbol Upload */}
+          <div className="form-group">
+            <label className="form-label">
+              {isEditing ? 'Update Party Symbol (optional)' : 'Upload Party Symbol'}
+            </label>
+            <input 
+              ref={symbolInputRef}
+              type="file"
+              className="form-input" /* Use form-input for consistent styling */
+              accept="image/*"
+              onChange={handlePartySymbolChange}
+              required={!isEditing && !symbolPreview}
+            />
+            {symbolPreview && (
+              <div className="image-preview">
+                <img 
+                  src={symbolPreview} 
+                  alt="Party symbol preview" 
+                  style={{ width: '100px', height: '100px', objectFit: 'cover' }} 
+                />
+              </div>
+            )}
+          </div>
+        </div> {/* END of form-grid */}
 
-        <div className="form-buttons">
+ <div 
+          className="form-buttons" 
+          style={!isEditing ? { justifyContent: 'center' } : {}}
+        >
           <button 
             type="submit" 
             className="submit-button" 
             disabled={loading}
+            // This style is applied only when the button is by itself
+            style={!isEditing ? { flex: 'none' } : {}}
           >
             {loading ? 'Processing...' : isEditing ? 'Update Candidate' : 'Submit Candidate'}
+            {/* For Voter.js, the text will be 'Submit Voter' etc. The logic is the same. */}
           </button>
           
           {isEditing && (
