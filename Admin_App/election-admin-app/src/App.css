@@ -417,7 +417,7 @@ body {
 }
 
 .header-logout {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  background: linear-gradient(135deg, #3f3131ff 0%, #ee5a52 100%);
   color: white;
   border: none;
   padding: 12px 20px;
