@@ -23,17 +23,7 @@ public class Voter {
         return name;
     }
 
-    public String getNic() {
-        return nic;
-    }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
 
     // **Setters (Optional, but useful if you modify data later)**
     public void setName(String name) {

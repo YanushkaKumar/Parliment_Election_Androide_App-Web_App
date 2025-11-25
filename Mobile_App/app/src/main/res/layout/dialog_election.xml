@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp"
+    android:padding="32dp"
     android:background="#FFFFFF"
     android:gravity="center">
 
@@ -13,33 +14,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Election Details"
-        android:textColor="#333333"
-        android:textSize="20sp"
+        android:textColor="@color/purple"
+        android:textSize="24sp"
         android:textStyle="bold"
+        android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:paddingBottom="12dp"/>
+        android:paddingBottom="24dp" />
 
     <!-- Vote Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonVote123"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="Vote"
+        android:layout_height="56dp"
+        android:text="Vote Now"
         android:textColor="#ffffff"
         android:textSize="16sp"
-       android:backgroundTint="@color/purple"
-        android:elevation="4dp"
-        android:layout_marginBottom="12dp"/>
+        android:textStyle="bold"
+        android:backgroundTint="@color/purple"
+        app:cornerRadius="12dp"
+        app:elevation="4dp"
+        app:icon="@android:drawable/ic_menu_send"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        android:layout_marginBottom="12dp" />
 
     <!-- Result Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonResult"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="Result"
+        android:layout_height="56dp"
+        android:text="View Results"
         android:backgroundTint="@color/purple"
         android:textColor="#ffffff"
         android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="12dp"
+        app:elevation="4dp"
+        app:icon="@android:drawable/ic_menu_view"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 
-        android:elevation="4dp"/>
 </LinearLayout>

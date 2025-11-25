@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,37 +8,40 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="24dp"
-    app:cardElevation="12dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp"
     app:strokeColor="@color/purple"
-    app:strokeWidth="3dp"
+    app:strokeWidth="2dp"
     app:rippleColor="?attr/colorPrimary"
-    android:textAlignment="center"
     tools:context=".ElectionAdapter">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:gravity="center"> <!-- Ensures content inside LinearLayout is centered -->
+        android:padding="20dp"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/tvElectionItemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textAlignment="center"
             android:textStyle="bold"
-            android:gravity="center" /> <!-- Centers the text within the TextView -->
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/purple"
+            android:gravity="center"
+            android:paddingBottom="8dp" />
 
         <!-- Divider between name and date -->
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginTop="8dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="12dp" /> <!-- Optional, ensures divider is centered -->
+            android:layout_marginBottom="8dp"
+            android:background="@color/purple"
+            android:alpha="0.3" />
 
         <TextView
             android:id="@+id/tvElectionItemDate"
@@ -46,8 +49,9 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textAlignment="center"
+            android:textColor="#757575"
             android:layout_marginTop="4dp"
-            android:gravity="center" /> <!-- Centers the text within the TextView -->
+            android:gravity="center" />
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

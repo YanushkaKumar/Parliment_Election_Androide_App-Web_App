@@ -40,7 +40,6 @@ public class CandidateResult {
     public String getDistrict() { return district; }
     public String getPhotoBase64() { return photoBase64; }
     public String getPartySymbolBase64() { return partySymbolBase64; }
-    public String getElectionName() { return electionName; }
-    public String getElectionDate() { return electionDate; }
+
     public int getVoteCount() { return voteCount; }
 }

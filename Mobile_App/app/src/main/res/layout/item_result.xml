@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,10 +9,10 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="6dp"
     app:strokeColor="@color/purple"
-    app:strokeWidth="1dp"
+    app:strokeWidth="2dp"
     app:rippleColor="?attr/colorPrimary"
     tools:context=".ElectionAdapter">
 
@@ -20,25 +20,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="20dp"
         android:gravity="center">
 
         <TextView
             android:id="@+id/resultElectionItemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textAlignment="center"
             android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/purple"
             android:gravity="center"
+            android:paddingBottom="8dp"
             tools:text="Presidential Election" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:background="#CCCCCC" />
+            android:background="@color/purple"
+            android:alpha="0.3" />
 
         <TextView
             android:id="@+id/resultElectionItemDate"
@@ -46,9 +50,11 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textAlignment="center"
+            android:textColor="#757575"
             android:gravity="center"
+            android:paddingTop="4dp"
             tools:text="2025-03-28" />
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
