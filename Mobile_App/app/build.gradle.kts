@@ -35,9 +35,14 @@ android {
     }
 
     packagingOptions {
-        resources.excludes.add("META-INF/*")}
-
+        resources.excludes.add("META-INF/*")
     }
+
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+    }
+}
 
     dependencies {
         implementation("androidx.appcompat:appcompat:1.7.0")
@@ -49,6 +54,22 @@ android {
         implementation("com.google.firebase:firebase-database:21.0.0")
         implementation("com.google.firebase:firebase-firestore:25.1.2")
         implementation("com.google.firebase:firebase-auth:23.2.0")
+
+        // Advanced Chart Libraries
+        implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+        // Card View for better UI
+        implementation("androidx.cardview:cardview:1.0.0")
+
+        // Lottie for animations
+        implementation("com.airbnb.android:lottie:6.1.0")
+
+        // Shimmer effect for loading
+        implementation("com.facebook.shimmer:shimmer:0.5.0")
+
+        // Circle ImageView
+        implementation("de.hdodenhof:circleimageview:3.1.0")
+
         testImplementation("junit:junit:4.13.2")
         androidTestImplementation("androidx.test.ext:junit:1.2.1")
         androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")

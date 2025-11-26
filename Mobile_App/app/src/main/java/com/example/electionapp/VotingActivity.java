@@ -242,8 +242,8 @@ public class VotingActivity extends AppCompatActivity implements VotingAdapter.O
                         });
                     } else if (currentHour < START_HOUR || currentHour >= END_HOUR) {
                         runOnUiThread(() -> {
-                            isVotingDisabled = true;
-                            votingAdapter.setVotingDisabled(true);
+                            timerTextView.setText("All votes have been cast");
+                            votesRemainingTextView.setText("Votes Remaining: 0");
                             timerTextView.setText("Voting is only allowed between 9:00 AM and 4:00 PM");
                         });
                     } else if (hasVoted || hasTimerExpired) {
@@ -456,7 +456,7 @@ public class VotingActivity extends AppCompatActivity implements VotingAdapter.O
                         });
                         return;
                     }
-
+                            votesRemainingTextView.setText("Votes Remaining: 0");
                     // If we have votes remaining, save this vote
                     saveIndividualVote(candidate);
                 } catch (Exception e) {
@@ -509,11 +509,11 @@ public class VotingActivity extends AppCompatActivity implements VotingAdapter.O
                                     // Update votes remaining display
                                     updateVotesRemainingDisplay();
 
-                                    // Check if all votes used
+                                    // Check if all votes have been cast
                                     getVotesUsedFromFirestore(votesUsed -> {
                                         if (votesUsed >= MAX_VOTES) {
-                                            new Handler().post(() -> {
-                                                showToast("All votes have been cast! You may now view your votes or return to the main menu.");
+                                            runOnUiThread(() -> {
+                                                showToast("All votes have been cast!");
                                                 isVotingDisabled = true;
                                                 votingAdapter.setVotingDisabled(true);
                                                 timerTextView.setText("All votes have been cast");
@@ -578,23 +578,10 @@ public class VotingActivity extends AppCompatActivity implements VotingAdapter.O
         // Update our local tracking of voted candidates first
         loadVotedCandidatesFromFirestore();
 
-        Set<String> pendingVotes = votingAdapter.getVotedCandidateIds();
-        if (pendingVotes.isEmpty()) {
-            return; // No pending votes to submit
-        }
+        WriteBatch batch = db.batch();
+        final boolean[] anySubmitted = {false};
 
-        // First check how many votes we've used
-        getVotesUsedFromFirestore(votesUsed -> {
-            if (votesUsed >= MAX_VOTES) {
-                showToast("Maximum votes already used, cannot submit additional votes");
-                return;
-            }
-
-            // We have votes remaining, so let's proceed
-            WriteBatch batch = db.batch();
-            final boolean[] anySubmitted = {false}; // Using array as a mutable container
-
-            for (String candidateId : pendingVotes) {
+        for (String candidateId : votingAdapter.getVotedCandidateIds()) {
                 // Skip already submitted votes
                 if (previouslyVotedCandidates.contains(candidateId)) {
                     continue;
@@ -646,7 +633,6 @@ public class VotingActivity extends AppCompatActivity implements VotingAdapter.O
                             showToast("Error submitting remaining votes");
                         });
             }
-        });
     }
 
     private void saveVoteState() {

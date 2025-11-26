@@ -1,183 +1,252 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardElevation="8dp"
-    app:strokeColor="@color/purple"
-    app:strokeWidth="2dp"
-    app:rippleColor="?attr/colorPrimary"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="28dp"
+    app:cardElevation="12dp"
+    android:backgroundTint="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:orientation="vertical">
 
-        <!-- Election Name -->
-        <TextView
-            android:id="@+id/tvElectionName"
+        <!-- Header with Gradient -->
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Presidential Election"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="@color/purple"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"/>
+            android:background="@drawable/gradient_gold"
+            android:padding="20dp">
 
-        <!-- Candidate Photo with Card Background -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_gravity="center"
-            app:cardCornerRadius="70dp"
-            app:cardElevation="6dp"
-            app:strokeColor="@color/purple"
-            app:strokeWidth="3dp"
-            android:layout_marginBottom="12dp">
+            <!-- Election Name -->
+            <TextView
+                android:id="@+id/tvElectionName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Presidential Election"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"
+                android:alpha="0.95" />
 
-            <ImageView
-                android:id="@+id/ivCandidatePhoto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:contentDescription="Candidate Photo" />
+        </RelativeLayout>
 
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Candidate ID -->
-        <TextView
-            android:id="@+id/tvCandidateId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ID: 678"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="#757575"
-            android:layout_gravity="center"
-            android:layout_marginBottom="4dp"/>
-
-        <!-- Candidate Name -->
-        <TextView
-            android:id="@+id/tvCandidateName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sajith Premadasa"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-medium"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:layout_marginBottom="12dp"/>
-
-        <!-- Horizontal layout for party info -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="12dp">
+            android:orientation="vertical"
+            android:padding="24dp">
 
-            <!-- Party Symbol with Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
+            <!-- Candidate Photo Section -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                app:strokeColor="@color/purple"
-                app:strokeWidth="1dp"
-                android:layout_marginEnd="12dp">
+                android:layout_marginBottom="20dp">
 
-                <ImageView
-                    android:id="@+id/ivPartySymbol"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="4dp"
-                    android:contentDescription="Party Symbol"/>
+                <!-- Photo with Neon Ring -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_centerHorizontal="true"
+                    app:cardCornerRadius="70dp"
+                    app:cardElevation="12dp"
+                    app:strokeColor="@color/neon_purple"
+                    app:strokeWidth="4dp">
 
-            </com.google.android.material.card.MaterialCardView>
+                    <ImageView
+                        android:id="@+id/ivCandidatePhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Candidate Photo"
+                        android:src="@android:drawable/ic_menu_gallery" />
 
-            <!-- Candidate Party -->
-            <TextView
-                android:id="@+id/tvCandidateParty"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MMP"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="@color/purple"/>
-        </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-        <!-- Location Info Card -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:strokeColor="@color/purple"
-            app:strokeWidth="1dp"
-            android:layout_marginBottom="16dp">
+                <!-- Badge -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="8dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="6dp"
+                    android:backgroundTint="#E8F5E9">
 
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⭐"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Verified"
+                            android:textColor="#2E7D32"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:layout_marginStart="4dp" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </RelativeLayout>
+
+            <!-- Candidate Info -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:gravity="center"
-                android:padding="12dp">
+                android:layout_marginBottom="20dp">
 
                 <TextView
-                    android:id="@+id/tvConstituency"
+                    android:id="@+id/tvCandidateId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Colombo 02"
-                    android:textSize="14sp"
+                    android:text="ID: 001"
+                    android:textSize="12sp"
+                    android:textColor="@color/gray"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/tvCandidateName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="John Doe"
+                    android:textColor="@color/dark_surface"
+                    android:textSize="24sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:fontFamily="sans-serif-black"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="4dp" />
 
-                <TextView
+                <!-- Party Info with Icon -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" | "
-                    android:textSize="14sp"
-                    android:textColor="#757575"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"/>
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="12dp">
 
-                <TextView
-                    android:id="@+id/tvDistrict"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Colombo"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginEnd="12dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="4dp"
+                        app:strokeColor="@color/neon_purple"
+                        app:strokeWidth="2dp">
+
+                        <ImageView
+                            android:id="@+id/ivPartySymbol"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="8dp"
+                            android:scaleType="fitCenter"
+                            android:src="@android:drawable/ic_menu_compass" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:id="@+id/tvCandidateParty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Democratic Party"
+                        android:textColor="@color/gradient_start"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+            <!-- Location Info -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="#F0F4FF">
 
-        <!-- Vote Button -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnVote"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="Vote"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/purple"
-            app:cornerRadius="12dp"
-            app:elevation="4dp"
-            app:icon="@android:drawable/checkbox_on_background"
-            app:iconGravity="textStart"
-            app:iconPadding="8dp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📍"
+                        android:textSize="20sp"
+                        android:layout_marginEnd="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvConstituency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Colombo 02"
+                        android:textColor="@color/gradient_start"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" • "
+                        android:textColor="@color/gray"
+                        android:textSize="14sp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp" />
+
+                    <TextView
+                        android:id="@+id/tvDistrict"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Colombo"
+                        android:textColor="@color/gradient_start"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Vote Button with Stunning Gradient -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVote"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:text="✓ Vote for this Candidate"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/gradient_start"
+                app:cornerRadius="18dp"
+                app:elevation="8dp"
+                app:icon="@android:drawable/checkbox_on_background"
+                app:iconGravity="textStart"
+                app:iconTint="@android:color/white"
+                app:rippleColor="@android:color/white" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
+

@@ -5,8 +5,16 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="32dp"
-    android:background="#FFFFFF"
+    android:background="@drawable/elevated_card_bg"
     android:gravity="center">
+
+    <!-- Icon -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🗳️"
+        android:textSize="56sp"
+        android:layout_marginBottom="16dp" />
 
     <!-- Election Title -->
     <TextView
@@ -14,10 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Election Details"
-        android:textColor="@color/purple"
-        android:textSize="24sp"
+        android:textColor="@color/gradient_start"
+        android:textSize="26sp"
         android:textStyle="bold"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="sans-serif-black"
         android:gravity="center"
         android:paddingBottom="24dp" />
 
@@ -25,34 +33,52 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonVote123"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:text="Vote Now"
+        android:layout_height="64dp"
+        android:text="🗳️ Vote Now"
         android:textColor="#ffffff"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
-        android:backgroundTint="@color/purple"
-        app:cornerRadius="12dp"
-        app:elevation="4dp"
+        android:backgroundTint="@color/gradient_start"
+        app:cornerRadius="18dp"
+        app:elevation="8dp"
         app:icon="@android:drawable/ic_menu_send"
         app:iconGravity="textStart"
-        app:iconPadding="8dp"
-        android:layout_marginBottom="12dp" />
+        app:iconTint="@android:color/white"
+        app:iconPadding="12dp"
+        android:layout_marginBottom="16dp" />
 
     <!-- Result Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonResult"
         android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="📊 View Results"
+        android:backgroundTint="@color/neon_purple"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:cornerRadius="18dp"
+        app:elevation="8dp"
+        app:icon="@android:drawable/ic_menu_view"
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white"
+        app:iconPadding="12dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Live Results Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonLiveResults"
+        android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="View Results"
-        android:backgroundTint="@color/purple"
+        android:text="📊 Live Results"
+        android:backgroundTint="@color/chart_red"
         android:textColor="#ffffff"
         android:textSize="16sp"
         android:textStyle="bold"
         app:cornerRadius="12dp"
         app:elevation="4dp"
-        app:icon="@android:drawable/ic_menu_view"
         app:iconGravity="textStart"
         app:iconPadding="8dp"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+        style="@style/Widget.MaterialComponents.Button" />
 
 </LinearLayout>

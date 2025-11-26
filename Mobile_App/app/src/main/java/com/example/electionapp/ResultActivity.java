@@ -1,17 +1,28 @@
 package com.example.electionapp;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -36,6 +47,8 @@ public class ResultActivity extends AppCompatActivity {
     private Spinner spinnerFilterValue;
     private TextView textViewNoResults;
     private TextView textViewElectionTitle;
+    private PieChart pieChartQuickView;
+    private Button btnViewAnalytics;
 
     private String currentElectionName;
     private String currentElectionDate;
@@ -53,6 +66,8 @@ public class ResultActivity extends AppCompatActivity {
         textViewElectionTitle = findViewById(R.id.textViewElectionTitle);
         spinnerFilterType = findViewById(R.id.spinnerFilterType);
         spinnerFilterValue = findViewById(R.id.spinnerFilterValue);
+        pieChartQuickView = findViewById(R.id.pieChartQuickView);
+        btnViewAnalytics = findViewById(R.id.btnViewAnalytics);
 
         // Initialize RecyclerView and Adapter
         recyclerView = findViewById(R.id.recyclerViewResults);
@@ -61,6 +76,14 @@ public class ResultActivity extends AppCompatActivity {
         allCandidateResults = new ArrayList<>();
         resultAdapter = new ElectionResultAdapter(candidateResults);
         recyclerView.setAdapter(resultAdapter);
+
+        // Setup Analytics Button
+        btnViewAnalytics.setOnClickListener(v -> {
+            Intent intent = new Intent(ResultActivity.this, AnalyticsActivity.class);
+            intent.putExtra("ELECTION_NAME", currentElectionName);
+            intent.putExtra("ELECTION_DATE", currentElectionDate);
+            startActivity(intent);
+        });
 
         // Set up filter type spinner
         ArrayAdapter<String> filterTypeAdapter = new ArrayAdapter<>(this,
@@ -260,17 +283,87 @@ public class ResultActivity extends AppCompatActivity {
                             textViewNoResults.setVisibility(View.VISIBLE);
                             recyclerView.setVisibility(View.GONE);
                             textViewNoResults.setText("No election results found");
+                            pieChartQuickView.setVisibility(View.GONE);
                         } else {
                             textViewNoResults.setVisibility(View.GONE);
                             recyclerView.setVisibility(View.VISIBLE);
+                            updatePieChart();
                         }
                     } else {
                         Toast.makeText(ResultActivity.this, "Error fetching election results", Toast.LENGTH_SHORT).show();
                         textViewNoResults.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.GONE);
                         textViewNoResults.setText("Error fetching election results");
+                        pieChartQuickView.setVisibility(View.GONE);
                     }
                 });
+    }
+
+    private void updatePieChart() {
+        if (allCandidateResults.isEmpty()) {
+            pieChartQuickView.setVisibility(View.GONE);
+            return;
+        }
+
+        pieChartQuickView.setVisibility(View.VISIBLE);
+
+        // Group votes by party
+        Map<String, Integer> partyVotes = new HashMap<>();
+        for (CandidateResult result : allCandidateResults) {
+            String party = result.getCandidateParty();
+            if (party != null && !party.isEmpty()) {
+                partyVotes.put(party, partyVotes.getOrDefault(party, 0) + result.getVoteCount());
+            }
+        }
+
+        // Create pie entries
+        List<PieEntry> entries = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : partyVotes.entrySet()) {
+            if (entry.getValue() > 0) {
+                entries.add(new PieEntry(entry.getValue(), entry.getKey()));
+            }
+        }
+
+        if (entries.isEmpty()) {
+            pieChartQuickView.setVisibility(View.GONE);
+            return;
+        }
+
+        // Create dataset
+        PieDataSet dataSet = new PieDataSet(entries, "Party Votes");
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        dataSet.setValueTextColor(Color.WHITE);
+        dataSet.setValueTextSize(12f);
+        dataSet.setSliceSpace(2f);
+        dataSet.setSelectionShift(5f);
+
+        // Create data
+        PieData data = new PieData(dataSet);
+        data.setValueFormatter(new PercentFormatter(pieChartQuickView));
+
+        // Configure chart
+        pieChartQuickView.setData(data);
+        pieChartQuickView.setUsePercentValues(true);
+        pieChartQuickView.getDescription().setEnabled(false);
+        pieChartQuickView.setDrawHoleEnabled(true);
+        pieChartQuickView.setHoleColor(Color.WHITE);
+        pieChartQuickView.setTransparentCircleRadius(58f);
+        pieChartQuickView.setDrawCenterText(true);
+        pieChartQuickView.setCenterText("Party\nDistribution");
+        pieChartQuickView.setCenterTextSize(14f);
+        pieChartQuickView.setRotationEnabled(true);
+        pieChartQuickView.setHighlightPerTapEnabled(true);
+
+        // Configure legend
+        Legend legend = pieChartQuickView.getLegend();
+        legend.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        legend.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        legend.setDrawInside(false);
+        legend.setWordWrapEnabled(true);
+
+        pieChartQuickView.animateY(1000);
+        pieChartQuickView.invalidate();
     }
 
     private void fetchLatestElectionResults() {

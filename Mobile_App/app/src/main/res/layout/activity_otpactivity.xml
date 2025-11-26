@@ -1,171 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@android:color/white">
+    android:background="@color/light_surface"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp">
 
-    <LinearLayout
+    <!-- Main Card -->
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:cardBackgroundColor="@android:color/white">
 
-        <com.google.android.material.card.MaterialCardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="6dp">
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center_horizontal">
 
+            <!-- Icon -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="32dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/gradient_start">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="🔐"
+                    android:textSize="32sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Verify OTP"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/dark_surface"
+                android:layout_marginBottom="6dp" />
+
+            <!-- Subtitle -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter the 4-digit code sent to your email"
+                android:textSize="13sp"
+                android:textColor="@color/gray"
+                android:textAlignment="center"
+                android:layout_marginBottom="24dp" />
+
+            <!-- OTP Boxes -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:padding="32dp">
+                android:layout_marginBottom="24dp">
 
-                <!-- Title -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Enter OTP"
-                    android:textSize="26sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/purple"
-                    android:paddingBottom="8dp" />
-
-                <!-- Subtitle -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Please enter the 4-digit code"
-                    android:textSize="14sp"
-                    android:textColor="#757575"
-                    android:paddingBottom="26dp" />
-
-                <!-- FIXED OTP BOXES -->
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <!-- Box 1 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:weightSum="4"
-                    android:layout_marginBottom="26dp">
+                    android:layout_margin="6dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="@color/gradient_start"
+                    app:strokeWidth="2dp"
+                    app:cardBackgroundColor="@color/light_surface">
 
-                    <!-- BOX TEMPLATE -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp"
-                        android:layout_weight="1"
-                        app:cardCornerRadius="12dp"
-                        app:strokeColor="@color/purple"
-                        app:strokeWidth="2dp">
-
-                        <EditText
-                            android:id="@+id/otpBox1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@android:color/transparent"
-                            android:digits="0123456789"
-                            android:gravity="center"
-                            android:inputType="number"
-                            android:maxLength="1"
-                            android:textColor="@color/purple"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
+                    <EditText
+                        android:id="@+id/otpBox1"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_margin="6dp"
-                        app:cardCornerRadius="12dp"
-                        app:strokeColor="@color/purple"
-                        app:strokeWidth="2dp">
+                        android:background="@android:color/transparent"
+                        android:digits="0123456789"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textColor="@color/dark_surface"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/otpBox2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@android:color/transparent"
-                            android:gravity="center"
-                            android:inputType="number"
-                            android:digits="0123456789"
-                            android:maxLength="1"
-                            android:textColor="@color/purple"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
+                <!-- Box 2 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="6dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="@color/gradient_start"
+                    app:strokeWidth="2dp"
+                    app:cardBackgroundColor="@color/light_surface">
+
+                    <EditText
+                        android:id="@+id/otpBox2"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_margin="6dp"
-                        app:cardCornerRadius="12dp"
-                        app:strokeColor="@color/purple"
-                        app:strokeWidth="2dp">
+                        android:background="@android:color/transparent"
+                        android:digits="0123456789"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textColor="@color/dark_surface"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/otpBox3"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@android:color/transparent"
-                            android:gravity="center"
-                            android:inputType="number"
-                            android:digits="0123456789"
-                            android:maxLength="1"
-                            android:textColor="@color/purple"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="0dp"
+                <!-- Box 3 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="6dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="@color/gradient_start"
+                    app:strokeWidth="2dp"
+                    app:cardBackgroundColor="@color/light_surface">
+
+                    <EditText
+                        android:id="@+id/otpBox3"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_margin="6dp"
-                        app:cardCornerRadius="12dp"
-                        app:strokeColor="@color/purple"
-                        app:strokeWidth="2dp">
+                        android:background="@android:color/transparent"
+                        android:digits="0123456789"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textColor="@color/dark_surface"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                        <EditText
-                            android:id="@+id/otpBox4"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@android:color/transparent"
-                            android:gravity="center"
-                            android:inputType="number"
-                            android:digits="0123456789"
-                            android:maxLength="1"
-                            android:textColor="@color/purple"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
 
-                </LinearLayout>
+                <!-- Box 4 -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_margin="6dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="@color/gradient_start"
+                    app:strokeWidth="2dp"
+                    app:cardBackgroundColor="@color/light_surface">
 
-                <!-- BUTTON -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/verifyButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="Verify OTP"
-                    android:textStyle="bold"
-                    android:textSize="16sp"
-                    android:backgroundTint="@color/purple"
-                    app:cornerRadius="14dp"
-                    app:elevation="3dp" />
+                    <EditText
+                        android:id="@+id/otpBox4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:digits="0123456789"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textColor="@color/dark_surface"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+            <!-- Verify Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/verifyButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Verify OTP"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                app:backgroundTint="@color/gradient_start"
+                app:cornerRadius="14dp"
+                app:elevation="3dp"
+                app:icon="@android:drawable/ic_menu_send"
+                app:iconGravity="textStart"
+                app:iconTint="@android:color/white" />
 
-    </LinearLayout>
+            <!-- Resend -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Didn't receive code? Resend"
+                android:textSize="13sp"
+                android:textColor="@color/gradient_start"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:clickable="true"
+                android:focusable="true" />
 
-</ScrollView>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
+

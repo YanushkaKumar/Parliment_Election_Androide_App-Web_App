@@ -24,14 +24,27 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".OTPActivity"
+            android:name=".DashboardActivity"
             android:exported="false" />
+        <activity
+            android:name=".AnalyticsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LiveResultsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OTPActivity"
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:theme="@style/Theme.ElectionApp" />
         <activity
             android:name=".VotingActivity"
             android:exported="false" />
         <activity
             android:name=".ElectionHomeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:hardwareAccelerated="true"
+            android:theme="@style/Theme.ElectionApp" />
         <activity
             android:name=".ResultActivity"
             android:exported="false" />

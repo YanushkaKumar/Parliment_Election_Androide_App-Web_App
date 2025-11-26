@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/gradient_cyan_purple"
     android:gravity="center"
-    android:background="@color/white"
+    android:orientation="vertical"
     android:padding="24dp"
     tools:context=".VLogingActivity">
 
@@ -15,78 +15,114 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="12dp"
-        app:strokeWidth="0dp">
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_gravity="center_horizontal"
-            android:padding="32dp">
+            android:padding="28dp"
+            android:gravity="center_horizontal">
 
+            <!-- Logo -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/gradient_start">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="🗳️"
+                    android:textSize="40sp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Welcome Text -->
             <TextView
-                android:id="@+id/vloginText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Voter Login"
-                android:textSize="32sp"
-                android:textAlignment="center"
+                android:text="Welcome Back!"
+                android:textSize="26sp"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif-medium"
-                android:textColor="@color/purple"
-                android:layout_marginBottom="8dp" />
+                android:textColor="@color/dark_surface"
+                android:layout_marginBottom="6dp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enter your NIC number to continue"
-                android:textSize="14sp"
+                android:text="Sign in to participate in elections"
+                android:textSize="13sp"
+                android:textColor="@color/gray"
                 android:textAlignment="center"
-                android:textColor="#757575"
-                android:layout_marginBottom="32dp" />
+                android:layout_marginBottom="28dp" />
 
-            <!-- Material TextInputLayout for NIC -->
+            <!-- NIC Input -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="NIC No"
-                app:boxCornerRadiusTopStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxStrokeColor="@color/purple"
+                android:layout_marginBottom="20dp"
+                android:hint="National Identity Card (NIC)"
+                app:boxCornerRadiusBottomEnd="14dp"
+                app:boxCornerRadiusBottomStart="14dp"
+                app:boxCornerRadiusTopEnd="14dp"
+                app:boxCornerRadiusTopStart="14dp"
+                app:boxStrokeColor="@color/gradient_start"
                 app:boxStrokeWidth="2dp"
-                app:hintTextColor="@color/purple"
+                app:hintTextColor="@color/gradient_start"
+                app:startIconDrawable="@android:drawable/ic_menu_myplaces"
+                app:startIconTint="@color/gradient_start"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/vlogingnic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:textColor="@color/black"
-                    android:padding="16dp"
-                    android:textSize="16sp" />
+                    android:inputType="number"
+                    android:maxLength="12"
+                    android:textSize="15sp"
+                    android:textColor="@color/dark_surface"
+                    android:padding="14dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Sign In Button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/vloginButton"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Login"
-                android:textSize="16sp"
+                android:text="Sign In"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:layout_marginTop="24dp"
-                android:backgroundTint="@color/purple"
-                app:cornerRadius="12dp"
-                app:elevation="4dp" />
+                android:textColor="@android:color/white"
+                app:backgroundTint="@color/gradient_start"
+                app:cornerRadius="14dp"
+                app:elevation="4dp"
+                app:icon="@android:drawable/ic_menu_send"
+                app:iconGravity="end"
+                app:iconTint="@android:color/white"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Help Text -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Need help? Contact Support"
+                android:textSize="13sp"
+                android:textColor="@color/gradient_start"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true" />
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
+

@@ -9,11 +9,11 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="6dp"
-    app:strokeColor="@color/purple"
-    app:strokeWidth="2dp"
-    app:rippleColor="?attr/colorPrimary"
+    android:backgroundTint="@android:color/white"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="12dp"
+    app:strokeWidth="0dp"
+    app:rippleColor="@color/gradient_start"
     tools:context=".ElectionAdapter">
 
     <LinearLayout
