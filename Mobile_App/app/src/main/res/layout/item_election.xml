@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Header with Icon and Title -->
+        <!-- Header with Gradient -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,12 +26,13 @@
             android:padding="16dp"
             android:gravity="center_vertical">
 
-            <!-- Election Icon -->
+            <!-- Icon -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_marginEnd="12dp"
                 app:cardCornerRadius="24dp"
-                app:cardElevation="2dp"
+                app:cardElevation="0dp"
                 app:cardBackgroundColor="@android:color/white">
 
                 <TextView
@@ -43,13 +44,11 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Election Name and Date -->
+            <!-- Title and Date -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -93,8 +92,8 @@
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
                     android:padding="6dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp" />
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp" />
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -114,78 +113,81 @@
                 android:orientation="horizontal"
                 android:layout_marginBottom="16dp">
 
-                <!-- Candidates -->
+                <!-- Candidates Stat -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="@color/light_surface"
-                    android:padding="12dp">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="👥"
-                        android:textSize="24sp" />
+                        android:textSize="16sp"
+                        android:layout_marginEnd="6dp" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_surface"
-                        android:layout_marginTop="4dp" />
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Candidates"
-                        android:textSize="10sp"
-                        android:textColor="@color/gray"
-                        android:layout_marginTop="2dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark_surface" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Candidates"
+                            android:textSize="10sp"
+                            android:textColor="@color/gray" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <!-- Spacer -->
-                <View
-                    android:layout_width="8dp"
-                    android:layout_height="1dp" />
-
-                <!-- Votes -->
+                <!-- Votes Stat -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:background="@color/light_surface"
-                    android:padding="12dp">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="📊"
-                        android:textSize="24sp" />
+                        android:textSize="16sp"
+                        android:layout_marginEnd="6dp" />
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1.5K"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/dark_surface"
-                        android:layout_marginTop="4dp" />
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Votes"
-                        android:textSize="10sp"
-                        android:textColor="@color/gray"
-                        android:layout_marginTop="2dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1.5K"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark_surface" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Votes Cast"
+                            android:textSize="10sp"
+                            android:textColor="@color/gray" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

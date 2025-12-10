@@ -1,130 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base Colors -->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="purple">#8692f7</color>
-    <color name="gray">#696969</color>
-    <color name="red">#FF0000</color>
+    <!-- Primary Brand Colors - Professional Blue Palette -->
+    <color name="primary">#1976D2</color>
+    <color name="primary_dark">#1565C0</color>
+    <color name="primary_light">#42A5F5</color>
+    <color name="primary_variant">#0D47A1</color>
 
-    <!-- Material3 Primary Brand Colors -->
-    <color name="md_theme_primary">#8692f7</color>
-    <color name="md_theme_primary_dark">#6B7AE5</color>
-    <color name="md_theme_primary_light">#A8B3F9</color>
-    <color name="md_theme_primary_container">#E8EBFF</color>
-    <color name="md_theme_on_primary">#FFFFFF</color>
-    <color name="md_theme_on_primary_container">#1A1F4D</color>
+    <!-- Secondary Colors - Complementary -->
+    <color name="secondary">#00ACC1</color>
+    <color name="secondary_dark">#00838F</color>
+    <color name="secondary_light">#26C6DA</color>
 
-    <!-- Material3 Secondary Colors -->
-    <color name="md_theme_secondary">#5F6B8A</color>
-    <color name="md_theme_secondary_container">#E3E7FF</color>
-    <color name="md_theme_on_secondary">#FFFFFF</color>
-    <color name="md_theme_on_secondary_container">#1B2744</color>
+    <!-- Accent Colors -->
+    <color name="accent">#FF6F00</color>
+    <color name="accent_light">#FF8F00</color>
 
-    <!-- Material3 Tertiary Colors -->
-    <color name="md_theme_tertiary">#7C5295</color>
-    <color name="md_theme_tertiary_container">#FFD7F5</color>
-    <color name="md_theme_on_tertiary">#FFFFFF</color>
-    <color name="md_theme_on_tertiary_container">#31003D</color>
-
-    <!-- Material3 Error Colors -->
-    <color name="md_theme_error">#BA1A1A</color>
-    <color name="md_theme_error_container">#FFDAD6</color>
-    <color name="md_theme_on_error">#FFFFFF</color>
-    <color name="md_theme_on_error_container">#410002</color>
-
-    <!-- Material3 Background & Surface -->
-    <color name="md_theme_background">#FDFBFF</color>
-    <color name="md_theme_on_background">#1A1B20</color>
-    <color name="md_theme_surface">#FDFBFF</color>
-    <color name="md_theme_surface_variant">#E3E1EC</color>
-    <color name="md_theme_on_surface">#1A1B20</color>
-    <color name="md_theme_on_surface_variant">#46464F</color>
-
-    <!-- Material3 Outline -->
-    <color name="md_theme_outline">#767680</color>
-    <color name="md_theme_outline_variant">#C7C5D0</color>
-
-    <!-- Material3 Surface Tints -->
-    <color name="md_theme_surface_tint">#8692f7</color>
-    <color name="md_theme_inverse_surface">#2F3036</color>
-    <color name="md_theme_inverse_on_surface">#F2F0F5</color>
-
-    <!-- Additional Colors for Analytics -->
-    <color name="background_color">#F5F5F5</color>
-    <color name="purple_200">#BBDEFB</color>
-    <color name="purple_500">#8692f7</color>
-    <color name="purple_700">#6B7AE5</color>
-    <color name="teal_200">#80DEEA</color>
-    <color name="teal_700">#00796B</color>
-    <color name="chart_blue">#2196F3</color>
-    <color name="chart_green">#4CAF50</color>
-    <color name="chart_red">#F44336</color>
-    <color name="chart_orange">#FF9800</color>
-    <color name="chart_purple">#9C27B0</color>
-
-    <!-- Human-Friendly Natural Colors -->
-    <color name="gradient_start">#5B86E5</color>
-    <color name="gradient_end">#36D1DC</color>
-    <color name="gradient_accent_start">#FF6B9D</color>
-    <color name="gradient_accent_end">#FFA07A</color>
-    <color name="glassmorphism">#E6FFFFFF</color>
-    <color name="glassmorphism_dark">#80000000</color>
-    <color name="neon_blue">#4A90E2</color>
-    <color name="neon_purple">#9B59B6</color>
-    <color name="neon_pink">#E74C3C</color>
-    <color name="card_shadow">#30000000</color>
-    <color name="accent_gold">#F39C12</color>
-    <color name="accent_cyan">#16A085</color>
-    <color name="dark_surface">#2C3E50</color>
-    <color name="light_surface">#ECF0F1</color>
-
-    <!-- Warm Natural Tones -->
-    <color name="warm_coral">#FF7E67</color>
-    <color name="warm_peach">#FFB199</color>
-    <color name="soft_mint">#A8E6CF</color>
-    <color name="soft_lavender">#C5B9E0</color>
-    <color name="gentle_blue">#87CEEB</color>
-    <color name="soft_rose">#FFB6C1</color>
-
-    <!-- Professional Chart Colors -->
-    <color name="chart_primary">#3498DB</color>
-    <color name="chart_success">#27AE60</color>
-    <color name="chart_warning">#F39C12</color>
-    <color name="chart_danger">#E74C3C</color>
-    <color name="chart_info">#16A085</color>
-    <color name="chart_secondary">#95A5A6</color>
-    <color name="md_theme_inverse_primary">#B4C4FF</color>
-
-    <!-- Semantic Colors for App -->
-    <color name="success">#4CAF50</color>
-    <color name="success_container">#C8E6C9</color>
-    <color name="warning">#FF9800</color>
-    <color name="warning_container">#FFE0B2</color>
-    <color name="info">#2196F3</color>
-    <color name="info_container">#BBDEFB</color>
-
-    <!-- State Colors -->
-    <color name="colorVoted">#9E9E9E</color>
-    <color name="colorDisabled">#B0B0B0</color>
-    <color name="colorPrimary">#8692f7</color>
-    <color name="colorPrimaryDark">#6B7AE5</color>
-    <color name="colorPrimaryLight">#A8B3F9</color>
+    <!-- Background Colors -->
+    <color name="background">#FAFAFA</color>
+    <color name="background_dark">#F5F5F5</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#F5F5F5</color>
 
     <!-- Text Colors -->
-    <color name="text_primary">#1A1B20</color>
+    <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
-    <color name="text_tertiary">#9E9E9E</color>
+    <color name="text_disabled">#BDBDBD</color>
     <color name="text_on_primary">#FFFFFF</color>
 
-    <!-- Divider & Overlay -->
+    <!-- Status Colors -->
+    <color name="success">#4CAF50</color>
+    <color name="success_dark">#388E3C</color>
+    <color name="warning">#FF9800</color>
+    <color name="warning_dark">#F57C00</color>
+    <color name="error">#F44336</color>
+    <color name="error_dark">#D32F2F</color>
+    <color name="info">#2196F3</color>
+
+    <!-- Chart Colors -->
+    <color name="chart_1">#1976D2</color>
+    <color name="chart_2">#4CAF50</color>
+    <color name="chart_3">#FF9800</color>
+    <color name="chart_4">#F44336</color>
+    <color name="chart_5">#9C27B0</color>
+    <color name="chart_6">#00BCD4</color>
+
+    <!-- Divider & Border -->
     <color name="divider">#E0E0E0</color>
-    <color name="overlay_light">#14000000</color>
-    <color name="overlay_dark">#1FFFFFFF</color>
+    <color name="border">#BDBDBD</color>
 
-    <!-- Card & Elevation -->
+    <!-- Overlay -->
+    <color name="overlay_light">#1A000000</color>
+    <color name="overlay_medium">#66000000</color>
+    <color name="overlay_dark">#99000000</color>
+
+    <!-- Legacy Support -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="purple">#8692f7</color>
+    <color name="gray">#757575</color>
+    <color name="red">#FF0000</color>
+    <color name="gradient_start">#1976D2</color>
+    <color name="gradient_end">#00ACC1</color>
+    <color name="dark_surface">#212121</color>
+    <color name="light_surface">#FAFAFA</color>
+    <color name="chart_primary">#1976D2</color>
+    <color name="chart_success">#4CAF50</color>
+    <color name="chart_warning">#FF9800</color>
+    <color name="chart_danger">#F44336</color>
+    <color name="chart_info">#00BCD4</color>
+    <color name="chart_secondary">#9E9E9E</color>
+    <color name="neon_blue">#2196F3</color>
+    <color name="neon_purple">#9C27B0</color>
+    <color name="neon_pink">#E91E63</color>
+
+    <!-- Material Design 3 Theme Colors -->
+    <color name="md_theme_primary">#1976D2</color>
+    <color name="md_theme_on_primary">#FFFFFF</color>
+    <color name="md_theme_primary_container">#BBDEFB</color>
+    <color name="md_theme_on_primary_container">#0D47A1</color>
+
+    <color name="md_theme_secondary">#00ACC1</color>
+    <color name="md_theme_on_secondary">#FFFFFF</color>
+    <color name="md_theme_secondary_container">#B2EBF2</color>
+    <color name="md_theme_on_secondary_container">#00838F</color>
+
+    <color name="md_theme_tertiary">#FF6F00</color>
+    <color name="md_theme_on_tertiary">#FFFFFF</color>
+    <color name="md_theme_tertiary_container">#FFE0B2</color>
+    <color name="md_theme_on_tertiary_container">#E65100</color>
+
+    <color name="md_theme_error">#F44336</color>
+    <color name="md_theme_on_error">#FFFFFF</color>
+    <color name="md_theme_error_container">#FFCDD2</color>
+    <color name="md_theme_on_error_container">#D32F2F</color>
+
+    <color name="md_theme_background">#FAFAFA</color>
+    <color name="md_theme_on_background">#212121</color>
+    <color name="md_theme_surface">#FFFFFF</color>
+    <color name="md_theme_on_surface">#212121</color>
+    <color name="md_theme_surface_variant">#F5F5F5</color>
+    <color name="md_theme_on_surface_variant">#616161</color>
+    <color name="md_theme_outline">#BDBDBD</color>
+    <color name="md_theme_outline_variant">#E0E0E0</color>
+    <color name="md_theme_inverse_surface">#212121</color>
+    <color name="md_theme_inverse_on_surface">#F5F5F5</color>
+    <color name="md_theme_inverse_primary">#90CAF9</color>
+
+    <!-- Additional Missing Colors -->
+    <color name="colorPrimary">#1976D2</color>
+    <color name="colorPrimaryLight">#42A5F5</color>
+    <color name="colorDisabled">#BDBDBD</color>
+    <color name="md_theme_primary_dark">#1565C0</color>
+    <color name="md_theme_primary_light">#90CAF9</color>
     <color name="card_background">#FFFFFF</color>
-    <color name="card_stroke">#E3E1EC</color>
-    <color name="elevation_overlay">#0A8692f7</color>
-
+    <color name="purple_700">#7B1FA2</color>
+    <color name="purple_500">#9C27B0</color>
+    <color name="chart_red">#F44336</color>
+    <color name="chart_green">#4CAF50</color>
+    <color name="chart_orange">#FF9800</color>
+    <color name="chart_blue">#2196F3</color>
+    <color name="gradient_accent_start">#FF6F00</color>
+    <color name="purple_200">#CE93D8</color>
+    <color name="teal_700">#00897B</color>
+    <color name="teal_200">#80CBC4</color>
 </resources>
+
