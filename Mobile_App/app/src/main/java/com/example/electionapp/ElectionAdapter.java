@@ -86,8 +86,8 @@ public class ElectionAdapter extends RecyclerView.Adapter<ElectionAdapter.Electi
 
         public ElectionViewHolder(View itemView) {
             super(itemView);
-            textViewElectionName = itemView.findViewById(R.id.tvElectionItemName);
-            textViewElectionDate = itemView.findViewById(R.id.tvElectionItemDate);
+            textViewElectionName = itemView.findViewById(R.id.electionItemName);
+            textViewElectionDate = itemView.findViewById(R.id.electionItemDate);
         }
     }
 

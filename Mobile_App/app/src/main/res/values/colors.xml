@@ -1,18 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Primary Brand Colors - Professional Blue Palette -->
+    <color name="primary">#1976D2</color>
+    <color name="primary_dark">#1565C0</color>
+    <color name="primary_light">#42A5F5</color>
+    <color name="primary_variant">#0D47A1</color>
+
+    <!-- Secondary Colors - Complementary -->
+    <color name="secondary">#00ACC1</color>
+    <color name="secondary_dark">#00838F</color>
+    <color name="secondary_light">#26C6DA</color>
+
+    <!-- Accent Colors -->
+    <color name="accent">#FF6F00</color>
+    <color name="accent_light">#FF8F00</color>
+
+    <!-- Background Colors -->
+    <color name="background">#FAFAFA</color>
+    <color name="background_dark">#F5F5F5</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#F5F5F5</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_disabled">#BDBDBD</color>
+    <color name="text_on_primary">#FFFFFF</color>
+
+    <!-- Status Colors -->
+    <color name="success">#4CAF50</color>
+    <color name="success_dark">#388E3C</color>
+    <color name="warning">#FF9800</color>
+    <color name="warning_dark">#F57C00</color>
+    <color name="error">#F44336</color>
+    <color name="error_dark">#D32F2F</color>
+    <color name="info">#2196F3</color>
+
+    <!-- Chart Colors -->
+    <color name="chart_1">#1976D2</color>
+    <color name="chart_2">#4CAF50</color>
+    <color name="chart_3">#FF9800</color>
+    <color name="chart_4">#F44336</color>
+    <color name="chart_5">#9C27B0</color>
+    <color name="chart_6">#00BCD4</color>
+
+    <!-- Divider & Border -->
+    <color name="divider">#E0E0E0</color>
+    <color name="border">#BDBDBD</color>
+
+    <!-- Overlay -->
+    <color name="overlay_light">#1A000000</color>
+    <color name="overlay_medium">#66000000</color>
+    <color name="overlay_dark">#99000000</color>
+
+    <!-- Legacy Support -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
     <color name="purple">#8692f7</color>
-    <color name="gray">#696969</color>
+    <color name="gray">#757575</color>
     <color name="red">#FF0000</color>
+    <color name="gradient_start">#1976D2</color>
+    <color name="gradient_end">#00ACC1</color>
+    <color name="dark_surface">#212121</color>
+    <color name="light_surface">#FAFAFA</color>
+    <color name="chart_primary">#1976D2</color>
+    <color name="chart_success">#4CAF50</color>
+    <color name="chart_warning">#FF9800</color>
+    <color name="chart_danger">#F44336</color>
+    <color name="chart_info">#00BCD4</color>
+    <color name="chart_secondary">#9E9E9E</color>
+    <color name="neon_blue">#2196F3</color>
+    <color name="neon_purple">#9C27B0</color>
+    <color name="neon_pink">#E91E63</color>
 
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorVoted">#9E9E9E</color>
-    <color name="colorDisabled">#B0B0B0</color> <!-- Replace with your disabled button color -->
-<!-- Replace with your primary button color -->
-    <color name="colorPrimaryDark">#C80808</color> <!-- Replace with your dark primary color (pressed state) -->
-    <color name="colorPrimaryLight">#FF4081</color> <!-- Replace with your light primary color (focused state) -->
+    <!-- Material Design 3 Theme Colors -->
+    <color name="md_theme_primary">#1976D2</color>
+    <color name="md_theme_on_primary">#FFFFFF</color>
+    <color name="md_theme_primary_container">#BBDEFB</color>
+    <color name="md_theme_on_primary_container">#0D47A1</color>
 
+    <color name="md_theme_secondary">#00ACC1</color>
+    <color name="md_theme_on_secondary">#FFFFFF</color>
+    <color name="md_theme_secondary_container">#B2EBF2</color>
+    <color name="md_theme_on_secondary_container">#00838F</color>
 
+    <color name="md_theme_tertiary">#FF6F00</color>
+    <color name="md_theme_on_tertiary">#FFFFFF</color>
+    <color name="md_theme_tertiary_container">#FFE0B2</color>
+    <color name="md_theme_on_tertiary_container">#E65100</color>
 
+    <color name="md_theme_error">#F44336</color>
+    <color name="md_theme_on_error">#FFFFFF</color>
+    <color name="md_theme_error_container">#FFCDD2</color>
+    <color name="md_theme_on_error_container">#D32F2F</color>
+
+    <color name="md_theme_background">#FAFAFA</color>
+    <color name="md_theme_on_background">#212121</color>
+    <color name="md_theme_surface">#FFFFFF</color>
+    <color name="md_theme_on_surface">#212121</color>
+    <color name="md_theme_surface_variant">#F5F5F5</color>
+    <color name="md_theme_on_surface_variant">#616161</color>
+    <color name="md_theme_outline">#BDBDBD</color>
+    <color name="md_theme_outline_variant">#E0E0E0</color>
+    <color name="md_theme_inverse_surface">#212121</color>
+    <color name="md_theme_inverse_on_surface">#F5F5F5</color>
+    <color name="md_theme_inverse_primary">#90CAF9</color>
+
+    <!-- Additional Missing Colors -->
+    <color name="colorPrimary">#1976D2</color>
+    <color name="colorPrimaryLight">#42A5F5</color>
+    <color name="colorDisabled">#BDBDBD</color>
+    <color name="md_theme_primary_dark">#1565C0</color>
+    <color name="md_theme_primary_light">#90CAF9</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="purple_700">#7B1FA2</color>
+    <color name="purple_500">#9C27B0</color>
+    <color name="chart_red">#F44336</color>
+    <color name="chart_green">#4CAF50</color>
+    <color name="chart_orange">#FF9800</color>
+    <color name="chart_blue">#2196F3</color>
+    <color name="gradient_accent_start">#FF6F00</color>
+    <color name="purple_200">#CE93D8</color>
+    <color name="teal_700">#00897B</color>
+    <color name="teal_200">#80CBC4</color>
 </resources>
+

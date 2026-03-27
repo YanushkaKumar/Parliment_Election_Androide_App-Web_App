@@ -1,9 +1,11 @@
 package com.example.electionapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,44 +17,78 @@ public class OTPActivity extends AppCompatActivity {
     private EditText otpBox1, otpBox2, otpBox3, otpBox4;
     private Button verifyButton;
     private String correctOTP;
+    private static final String TAG = "OTPActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otpactivity);
 
-        // Initialize views
-        otpBox1 = findViewById(R.id.otpBox1);
-        otpBox2 = findViewById(R.id.otpBox2);
-        otpBox3 = findViewById(R.id.otpBox3);
-        otpBox4 = findViewById(R.id.otpBox4);
-        verifyButton = findViewById(R.id.verifyButton);
+        try {
+            // Initialize views
+            otpBox1 = findViewById(R.id.otpBox1);
+            otpBox2 = findViewById(R.id.otpBox2);
+            otpBox3 = findViewById(R.id.otpBox3);
+            otpBox4 = findViewById(R.id.otpBox4);
+            verifyButton = findViewById(R.id.verifyButton);
 
-        // Retrieve OTP from the intent
-        correctOTP = getIntent().getStringExtra("OTP");
+            // Retrieve OTP from the intent
+            correctOTP = getIntent().getStringExtra("OTP");
 
-        // Add TextWatchers for auto-focus functionality
-        addOTPTextWatchers();
-
-        // Handle OTP verification on button click
-        verifyButton.setOnClickListener(v -> {
-            String otp = otpBox1.getText().toString() + otpBox2.getText().toString() +
-                    otpBox3.getText().toString() + otpBox4.getText().toString();
-
-            if (otp.equals(correctOTP)) {
-                // OTP is correct
-                Toast.makeText(OTPActivity.this, "OTP Verified Successfully!", Toast.LENGTH_SHORT).show();
-
-                // Navigate to ElectionHomeActivity
-                Intent intent = new Intent(OTPActivity.this, ElectionHomeActivity.class);
-                startActivity(intent);
-                finish(); // Close this activity to prevent going back
-            } else {
-                // OTP is incorrect
-                Toast.makeText(OTPActivity.this, "Invalid OTP. Please try again.", Toast.LENGTH_SHORT).show();
-                clearOTPFields();
+            if (correctOTP == null || correctOTP.isEmpty()) {
+                Toast.makeText(this, "OTP not received. Please try again.", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
             }
-        });
+
+            Log.d(TAG, "OTP Activity started successfully");
+
+            // Add TextWatchers for auto-focus functionality
+            addOTPTextWatchers();
+
+            // Handle OTP verification on button click
+            verifyButton.setOnClickListener(v -> {
+                try {
+                    String otp = otpBox1.getText().toString() + otpBox2.getText().toString() +
+                            otpBox3.getText().toString() + otpBox4.getText().toString();
+
+                    if (otp.equals(correctOTP)) {
+                        // OTP is correct
+                        Toast.makeText(OTPActivity.this, "✅ OTP Verified Successfully!", Toast.LENGTH_SHORT).show();
+
+                        // Retrieve NIC from SharedPreferences
+                        SharedPreferences sharedPreferences = getSharedPreferences("ElectionAppPrefs", MODE_PRIVATE);
+                        String nic = sharedPreferences.getString("NIC", null);
+
+                        Log.d(TAG, "Retrieved NIC: " + nic);
+
+                        if (nic != null && !nic.isEmpty()) {
+                            // Navigate to ElectionHomeActivity with NIC
+                            Intent intent = new Intent(OTPActivity.this, ElectionHomeActivity.class);
+                            intent.putExtra("NIC", nic);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(OTPActivity.this, "Error: NIC not found. Please login again.", Toast.LENGTH_LONG).show();
+                            finish();
+                        }
+                    } else {
+                        // OTP is incorrect
+                        Toast.makeText(OTPActivity.this, "❌ Invalid OTP. Please try again.", Toast.LENGTH_SHORT).show();
+                        clearOTPFields();
+                        otpBox1.requestFocus();
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "Error verifying OTP: ", e);
+                    Toast.makeText(OTPActivity.this, "Error verifying OTP. Please try again.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } catch (Exception e) {
+            Log.e(TAG, "Error in onCreate: ", e);
+            Toast.makeText(this, "Error loading OTP screen. Please try again.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     private void addOTPTextWatchers() {

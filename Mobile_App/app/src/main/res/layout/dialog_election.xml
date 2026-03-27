@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:background="#FFFFFF"
+    android:padding="32dp"
+    android:background="@drawable/elevated_card_bg"
     android:gravity="center">
+
+    <!-- Icon -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🗳️"
+        android:textSize="56sp"
+        android:layout_marginBottom="16dp" />
 
     <!-- Election Title -->
     <TextView
@@ -13,33 +22,63 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Election Details"
-        android:textColor="#333333"
-        android:textSize="20sp"
+        android:textColor="@color/gradient_start"
+        android:textSize="26sp"
         android:textStyle="bold"
+        android:fontFamily="sans-serif-black"
         android:gravity="center"
-        android:paddingBottom="12dp"/>
+        android:paddingBottom="24dp" />
 
     <!-- Vote Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonVote123"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="Vote"
+        android:layout_height="64dp"
+        android:text="🗳️ Vote Now"
         android:textColor="#ffffff"
-        android:textSize="16sp"
-       android:backgroundTint="@color/purple"
-        android:elevation="4dp"
-        android:layout_marginBottom="12dp"/>
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/gradient_start"
+        app:cornerRadius="18dp"
+        app:elevation="8dp"
+        app:icon="@android:drawable/ic_menu_send"
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white"
+        app:iconPadding="12dp"
+        android:layout_marginBottom="16dp" />
 
     <!-- Result Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonResult"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="Result"
-        android:backgroundTint="@color/purple"
+        android:layout_height="64dp"
+        android:text="📊 View Results"
+        android:backgroundTint="@color/neon_purple"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:cornerRadius="18dp"
+        app:elevation="8dp"
+        app:icon="@android:drawable/ic_menu_view"
+        app:iconGravity="textStart"
+        app:iconTint="@android:color/white"
+        app:iconPadding="12dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Live Results Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonLiveResults"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="📊 Live Results"
+        android:backgroundTint="@color/chart_red"
         android:textColor="#ffffff"
         android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="12dp"
+        app:elevation="4dp"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        style="@style/Widget.MaterialComponents.Button" />
 
-        android:elevation="4dp"/>
 </LinearLayout>

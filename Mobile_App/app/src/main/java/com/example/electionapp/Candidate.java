@@ -111,13 +111,7 @@ public class Candidate {
         this.partySymbolBase64 = partySymbolBase64;
     }
 
-    public int getVotes() {
-        return votes;
-    }
 
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
 
     // Method to increment votes
     public void incrementVotes() {

@@ -34,8 +34,8 @@ public class VLogingActivity extends AppCompatActivity {
     private static final String TAG = "VLogingActivity";
 
     // Gmail credentials (use an App Password for security)
-    private static final String SENDER_EMAIL = "yanushkakumara123@gmail.com";  // Replace with your Gmail
-    private static final String SENDER_PASSWORD = "yirg mekp murw qnfm"; // Generate an App Password
+    private static final String SENDER_EMAIL = "yanushkakumaar@gmail.com";  // Replace with your Gmail
+    private static final String SENDER_PASSWORD = "mrcb mwgk ttgh qtdw"; // Generate an App Password
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

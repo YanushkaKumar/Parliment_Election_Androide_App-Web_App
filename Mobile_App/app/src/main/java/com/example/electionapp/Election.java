@@ -43,15 +43,5 @@ public class Election {
         return date;
     }
 
-    public String getCandidateId() {
-        return candidateId;
-    }
 
-    public String getCandidateName() {
-        return candidateName;
-    }
-
-    public String getVoterNIC() {
-        return voterNIC;
-    }
 }

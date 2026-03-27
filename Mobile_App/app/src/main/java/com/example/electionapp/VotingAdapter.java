@@ -250,14 +250,12 @@ public class VotingAdapter extends RecyclerView.Adapter<VotingAdapter.CandidateV
                 holder.btnVote.setText("Vote");
             }
 
+            // Set up button click listener
             holder.btnVote.setOnClickListener(v -> {
                 try {
-                    if (canVoteForThisCandidate && listener != null) {
-                        // Record the vote
-                        if (recordVote(candidateId)) {
-                            // Notify the activity that a vote was cast
-                            listener.onVoteButtonClicked(candidate, votesRemaining);
-                        }
+                    if (recordVote(candidateId)) {
+                        // Notify the activity that a vote was cast
+                        listener.onVoteButtonClicked(candidate, votesRemaining);
                     }
                 } catch (Exception e) {
                     System.out.println("Error handling vote button click: " + e.getMessage());
