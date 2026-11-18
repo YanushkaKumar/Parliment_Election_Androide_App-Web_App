@@ -10,12 +10,21 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter OTP"
-        android:textColorHint="@color/purple"
-        android:textSize="18sp"
+        android:text="Enter verification code"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:paddingBottom="16dp"
+        android:paddingBottom="8dp"
         android:textColor="@color/purple" />
+
+    <TextView
+        android:id="@+id/tvOtpSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="We emailed you a 6-digit code."
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        android:layout_marginBottom="24dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -26,49 +35,74 @@
 
         <EditText
             android:id="@+id/otpBox1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="44dp"
+            android:layout_height="52dp"
             android:inputType="number"
+            android:importantForAutofill="no"
             android:maxLength="1"
             android:gravity="center"
             android:textSize="24sp"
-            android:background="@android:drawable/editbox_background"
-            android:focusableInTouchMode="true" />
-
+            android:textColor="@color/black"
+            android:background="@android:drawable/editbox_background" />
         <EditText
             android:id="@+id/otpBox2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="44dp"
+            android:layout_height="52dp"
             android:inputType="number"
+            android:importantForAutofill="no"
             android:maxLength="1"
             android:gravity="center"
             android:textSize="24sp"
+            android:textColor="@color/black"
             android:background="@android:drawable/editbox_background"
-            android:focusableInTouchMode="true"
             android:layout_marginStart="8dp" />
-
         <EditText
             android:id="@+id/otpBox3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="44dp"
+            android:layout_height="52dp"
             android:inputType="number"
+            android:importantForAutofill="no"
             android:maxLength="1"
             android:gravity="center"
             android:textSize="24sp"
+            android:textColor="@color/black"
             android:background="@android:drawable/editbox_background"
-            android:focusableInTouchMode="true"
             android:layout_marginStart="8dp" />
-
         <EditText
             android:id="@+id/otpBox4"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="44dp"
+            android:layout_height="52dp"
             android:inputType="number"
+            android:importantForAutofill="no"
             android:maxLength="1"
             android:gravity="center"
             android:textSize="24sp"
+            android:textColor="@color/black"
             android:background="@android:drawable/editbox_background"
-            android:focusableInTouchMode="true"
+            android:layout_marginStart="8dp" />
+        <EditText
+            android:id="@+id/otpBox5"
+            android:layout_width="44dp"
+            android:layout_height="52dp"
+            android:inputType="number"
+            android:importantForAutofill="no"
+            android:maxLength="1"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:background="@android:drawable/editbox_background"
+            android:layout_marginStart="8dp" />
+        <EditText
+            android:id="@+id/otpBox6"
+            android:layout_width="44dp"
+            android:layout_height="52dp"
+            android:inputType="number"
+            android:importantForAutofill="no"
+            android:maxLength="1"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:background="@android:drawable/editbox_background"
             android:layout_marginStart="8dp" />
 
     </LinearLayout>
@@ -78,9 +112,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="12dp"
-        android:text="Verify OTP"
+        android:text="Verify"
         android:textSize="18sp"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/purple"/>
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/purple" />
+
+    <TextView
+        android:id="@+id/tvResend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="8dp"
+        android:text="Resend code"
+        android:textColor="@color/purple"
+        android:textSize="15sp" />
 
 </LinearLayout>

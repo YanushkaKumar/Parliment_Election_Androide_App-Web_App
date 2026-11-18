@@ -847,8 +847,9 @@ body {
     display: none;
   }
   
+  /* The sidebar is in normal flow here, so no extra offset is needed. */
   .main-content {
-    margin-left: 280px;
+    margin-left: 0;
   }
 }
 

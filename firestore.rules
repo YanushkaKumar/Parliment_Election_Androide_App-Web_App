@@ -1,0 +1,69 @@
+rules_version = '2';
+
+// Security model
+// - Admins sign in to the web app with email/password. An account is an admin
+//   only if a document exists at /admins/{uid} (create it in the Firebase console).
+// - Voters sign in on Android through the requestOtp/verifyOtp Cloud Functions,
+//   which issue a custom token with uid "voter_<voterDocId>" and claim role="voter".
+// - Ballots (/results) and per-voter tallies (/voterVotes) are written ONLY by the
+//   castVote Cloud Function (Admin SDK bypasses these rules).
+// - OTP records (/otps) are server-only.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isVoter() {
+      return signedIn() && request.auth.token.role == 'voter';
+    }
+
+    // "voter_<docId>" -> "<docId>"
+    function voterId() {
+      return request.auth.uid.split('_')[1];
+    }
+
+    match /admins/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    match /elections/{electionId} {
+      allow read: if isAdmin() || isVoter();
+      allow write: if isAdmin();
+    }
+
+    match /candidates/{candidateId} {
+      allow read: if isAdmin() || isVoter();
+      allow write: if isAdmin();
+    }
+
+    match /voters/{id} {
+      allow read: if isAdmin() || (isVoter() && voterId() == id);
+      allow write: if isAdmin();
+    }
+
+    // Document id is "<electionId>_<voterDocId>"; matching on the id lets a voter
+    // read their own (possibly not-yet-existing) tally.
+    match /voterVotes/{id} {
+      allow read: if isAdmin() || (isVoter() && id.matches('^[A-Za-z0-9]+_' + voterId() + '$'));
+      allow write: if false;
+    }
+
+    match /results/{ballotId} {
+      allow read: if isAdmin();
+      allow delete: if isAdmin();
+      allow create, update: if false;
+    }
+
+    match /otps/{nic} {
+      allow read, write: if false;
+    }
+  }
+}

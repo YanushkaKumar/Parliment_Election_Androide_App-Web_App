@@ -1,57 +1,33 @@
 package com.example.electionapp;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+
 public class Election {
-    private String name;
-    private String date;
-    private String candidateId;
-    private String candidateName;
-    private String voterNIC;
+    private final String id;
+    private final String name;
+    private final String date;      // yyyy-MM-dd
+    private final String startTime; // HH:mm, Asia/Colombo
+    private final String endTime;   // HH:mm, Asia/Colombo
 
-    //Empty constructor required for Firestore
-    public Election() {
-        this.name = "";
-        this.date = "N/A";
-        this.candidateId = "";
-        this.candidateName = "";
-        this.voterNIC = "";
-    }
-
-    // Constructor with two parameters (existing functionality)
-    public Election(String name, String date) {
+    public Election(String id, String name, String date, String startTime, String endTime) {
+        this.id = id;
         this.name = name;
-        this.date = (date == null || date.isEmpty()) ? "N/A" : date;
-        this.candidateId = "";
-        this.candidateName = "";
-        this.voterNIC = "";
+        this.date = date;
+        this.startTime = startTime != null ? startTime : ElectionTime.DEFAULT_START;
+        this.endTime = endTime != null ? endTime : ElectionTime.DEFAULT_END;
     }
 
-    // New constructor with all required parameters
-    public Election(String name, String date, String candidateId, String candidateName, String voterNIC) {
-        this.name = name;
-        this.date = (date == null || date.isEmpty()) ? "N/A" : date;
-        this.candidateId = (candidateId == null) ? "" : candidateId;
-        this.candidateName = (candidateName == null) ? "" : candidateName;
-        this.voterNIC = (voterNIC == null) ? "" : voterNIC;
+    /** Returns null if the document is missing required fields. */
+    public static Election fromDocument(DocumentSnapshot doc) {
+        String name = doc.getString("name");
+        String date = doc.getString("date");
+        if (name == null || date == null) return null;
+        return new Election(doc.getId(), name, date, doc.getString("startTime"), doc.getString("endTime"));
     }
 
-    // Getters
-    public String getName() {
-        return name;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public String getCandidateId() {
-        return candidateId;
-    }
-
-    public String getCandidateName() {
-        return candidateName;
-    }
-
-    public String getVoterNIC() {
-        return voterNIC;
-    }
+    public String getId() { return id; }
+    public String getName() { return name; }
+    public String getDate() { return date; }
+    public String getStartTime() { return startTime; }
+    public String getEndTime() { return endTime; }
 }

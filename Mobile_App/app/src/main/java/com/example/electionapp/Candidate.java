@@ -1,126 +1,51 @@
 package com.example.electionapp;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+
 public class Candidate {
-    private String candidateId;
-    private String candidateName;
-    private String candidateParty;
-    private String constituency;
-    private String district;
-    private String electionName;
-    private String candidatePhotoBase64;
-    private String partySymbolBase64;
-    private int votes;
-    private boolean voted; // New field
+    private final String docId;        // Firestore document id (used by castVote)
+    private final String candidateId;  // human-readable id entered by the admin
+    private final String candidateName;
+    private final String candidateParty;
+    private final String constituency;
+    private final String district;
+    private final String electionName;
+    private final String candidatePhotoBase64;
+    private final String partySymbolBase64;
+    private final long votes;
+    private boolean voted;
 
-    // Main constructor with required fields
-    public Candidate(String candidateId, String candidateName, String candidateParty) {
-        this.candidateId = candidateId;
-        this.candidateName = candidateName;
-        this.candidateParty = candidateParty;
-        this.votes = 0; // Initialize votes to zero
-        this.voted = false; // Initialize voted to false
+    private Candidate(DocumentSnapshot doc) {
+        docId = doc.getId();
+        candidateId = orEmpty(doc.getString("candidateId"));
+        candidateName = orEmpty(doc.getString("candidateName"));
+        candidateParty = orEmpty(doc.getString("candidateParty"));
+        constituency = orEmpty(doc.getString("constituency"));
+        district = orEmpty(doc.getString("district"));
+        electionName = orEmpty(doc.getString("electionName"));
+        candidatePhotoBase64 = doc.getString("candidatePhotoBase64");
+        partySymbolBase64 = doc.getString("partySymbolBase64");
+        Long v = doc.getLong("votes");
+        votes = v != null ? v : 0;
     }
 
-    // Full constructor with all fields
-    public Candidate(String candidateId, String candidateName, String candidateParty,
-                     String constituency, String district, String electionName,
-                     String candidatePhotoBase64, String partySymbolBase64, int votes) {
-        this.candidateId = candidateId;
-        this.candidateName = candidateName;
-        this.candidateParty = candidateParty;
-        this.constituency = constituency;
-        this.district = district;
-        this.electionName = electionName;
-        this.candidatePhotoBase64 = candidatePhotoBase64;
-        this.partySymbolBase64 = partySymbolBase64;
-        this.votes = votes;
-        this.voted = false; // Initialize voted to false
+    public static Candidate fromDocument(DocumentSnapshot doc) {
+        Candidate c = new Candidate(doc);
+        return c.candidateName.isEmpty() ? null : c;
     }
 
-    // Getters and setters for voted
-    public boolean isVoted() {
-        return voted;
-    }
+    private static String orEmpty(String s) { return s != null ? s : ""; }
 
-    public void setVoted(boolean voted) {
-        this.voted = voted;
-    }
-
-    // Getters and setters
-    public String getCandidateId() {
-        return candidateId;
-    }
-
-    public void setCandidateId(String candidateId) {
-        this.candidateId = candidateId;
-    }
-
-    public String getCandidateName() {
-        return candidateName;
-    }
-
-    public void setCandidateName(String candidateName) {
-        this.candidateName = candidateName;
-    }
-
-    public String getCandidateParty() {
-        return candidateParty;
-    }
-
-    public void setCandidateParty(String candidateParty) {
-        this.candidateParty = candidateParty;
-    }
-
-    public String getConstituency() {
-        return constituency;
-    }
-
-    public void setConstituency(String constituency) {
-        this.constituency = constituency;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getElectionName() {
-        return electionName;
-    }
-
-    public void setElectionName(String electionName) {
-        this.electionName = electionName;
-    }
-
-    public String getCandidatePhotoBase64() {
-        return candidatePhotoBase64;
-    }
-
-    public void setCandidatePhotoBase64(String candidatePhotoBase64) {
-        this.candidatePhotoBase64 = candidatePhotoBase64;
-    }
-
-    public String getPartySymbolBase64() {
-        return partySymbolBase64;
-    }
-
-    public void setPartySymbolBase64(String partySymbolBase64) {
-        this.partySymbolBase64 = partySymbolBase64;
-    }
-
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
-
-    // Method to increment votes
-    public void incrementVotes() {
-        this.votes++;
-    }
+    public String getDocId() { return docId; }
+    public String getCandidateId() { return candidateId; }
+    public String getCandidateName() { return candidateName; }
+    public String getCandidateParty() { return candidateParty; }
+    public String getConstituency() { return constituency; }
+    public String getDistrict() { return district; }
+    public String getElectionName() { return electionName; }
+    public String getCandidatePhotoBase64() { return candidatePhotoBase64; }
+    public String getPartySymbolBase64() { return partySymbolBase64; }
+    public long getVotes() { return votes; }
+    public boolean isVoted() { return voted; }
+    public void setVoted(boolean voted) { this.voted = voted; }
 }

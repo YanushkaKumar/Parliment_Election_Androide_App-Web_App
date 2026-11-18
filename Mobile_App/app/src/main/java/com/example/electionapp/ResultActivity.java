@@ -18,10 +18,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class ResultActivity extends AppCompatActivity {
@@ -70,15 +68,15 @@ public class ResultActivity extends AppCompatActivity {
         spinnerFilterType.setAdapter(filterTypeAdapter);
 
         // Retrieve the election name and date passed from the previous activity
-        currentElectionName = getIntent().getStringExtra("ELECTION_NAME");
-        currentElectionDate = getIntent().getStringExtra("ELECTION_DATE");
-
-        if (currentElectionName != null && currentElectionDate != null) {
-            updateElectionTitle(currentElectionName, currentElectionDate);
-            fetchElectionResults(currentElectionName, currentElectionDate);
-        } else {
-            fetchLatestElectionResults();
+        Election election = ElectionHomeActivity.getElection(getIntent());
+        if (election == null) {
+            finish();
+            return;
         }
+        currentElectionName = election.getName();
+        currentElectionDate = election.getDate();
+        updateElectionTitle(currentElectionName, currentElectionDate);
+        fetchElectionResults(currentElectionName, currentElectionDate);
 
         // Set up spinner listeners
         spinnerFilterType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -196,64 +194,39 @@ public class ResultActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Voters cannot read individual ballots, so results come from the per-candidate
+     * "votes" counter that the castVote Cloud Function increments.
+     */
     private void fetchElectionResults(String electionName, String electionDate) {
-        // Map to count votes for each candidate
-        Map<String, CandidateResult> candidateVotesMap = new HashMap<>();
-
-        firestore.collection("results")
+        firestore.collection("candidates")
                 .whereEqualTo("electionName", electionName)
-                .whereEqualTo("electionDate", electionDate)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
+                        allCandidateResults.clear();
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            String candidateId = document.getString("candidateId");
-                            String candidateName = document.getString("candidateName");
-                            String candidateParty = document.getString("candidateParty");
-                            String constituency = document.getString("constituency");
-                            String district = document.getString("district");
-                            String photoBase64 = document.getString("candidatePhotoBase64");
-                            String partySymbolBase64 = document.getString("partySymbolBase64");
-
-                            // Create a key for the candidate
-                            String key = candidateId + "_" + candidateName;
-
-                            if (candidateVotesMap.containsKey(key)) {
-                                // Increment vote count for existing candidate
-                                CandidateResult result = candidateVotesMap.get(key);
-                                result.incrementVotes();
-                            } else {
-                                // Create new candidate result
-                                CandidateResult result = new CandidateResult(
-                                        candidateId,
-                                        candidateName,
-                                        candidateParty,
-                                        constituency,
-                                        district,
-                                        photoBase64,
-                                        partySymbolBase64,
-                                        electionName,
-                                        electionDate,
-                                        1 // Initial vote count
-                                );
-                                candidateVotesMap.put(key, result);
-                            }
+                            Candidate c = Candidate.fromDocument(document);
+                            if (c == null) continue;
+                            allCandidateResults.add(new CandidateResult(
+                                    c.getCandidateId(),
+                                    c.getCandidateName(),
+                                    c.getCandidateParty(),
+                                    c.getConstituency(),
+                                    c.getDistrict(),
+                                    c.getCandidatePhotoBase64(),
+                                    c.getPartySymbolBase64(),
+                                    electionName,
+                                    electionDate,
+                                    (int) c.getVotes()));
                         }
 
-                        // Convert map to list and update adapter
-                        allCandidateResults.clear();
-                        allCandidateResults.addAll(candidateVotesMap.values());
-
-                        // Sort all results by vote count in descending order
                         Collections.sort(allCandidateResults, (c1, c2) ->
                                 Integer.compare(c2.getVoteCount(), c1.getVoteCount()));
 
-                        // Initialize with all results
                         candidateResults.clear();
                         candidateResults.addAll(allCandidateResults);
                         resultAdapter.notifyDataSetChanged();
-
-                        // Update filter spinners with available options
                         updateFilterValueSpinner(spinnerFilterType.getSelectedItem().toString());
 
                         if (allCandidateResults.isEmpty()) {
@@ -269,32 +242,6 @@ public class ResultActivity extends AppCompatActivity {
                         textViewNoResults.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.GONE);
                         textViewNoResults.setText("Error fetching election results");
-                    }
-                });
-    }
-
-    private void fetchLatestElectionResults() {
-        // First get the most recent election
-        firestore.collection("results")
-                .orderBy("electionDate", com.google.firebase.firestore.Query.Direction.DESCENDING)
-                .limit(1)
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                        QueryDocumentSnapshot latestElection = (QueryDocumentSnapshot) task.getResult().getDocuments().get(0);
-                        currentElectionName = latestElection.getString("electionName");
-                        currentElectionDate = latestElection.getString("electionDate");
-
-                        // Update the election title
-                        updateElectionTitle(currentElectionName, currentElectionDate);
-
-                        // Now fetch results for this election
-                        fetchElectionResults(currentElectionName, currentElectionDate);
-                    } else {
-                        Toast.makeText(ResultActivity.this, "No elections found", Toast.LENGTH_SHORT).show();
-                        textViewNoResults.setVisibility(View.VISIBLE);
-                        recyclerView.setVisibility(View.GONE);
-                        textViewNoResults.setText("No elections found");
                     }
                 });
     }

@@ -1,186 +1,149 @@
 # 🗳️ Election Voting System
 
-## 📌 Overview
-The **Election Voting System** is a secure platform that enables users to participate in elections using a **mobile app** and a **web application**. It ensures authentication via National Identity Card (NIC), One-Time Password (OTP) verification via email, and allows each user to vote up to 3 times during the election period.
+A Firebase-backed election system with two apps:
 
-This system consists of two main components:
-- **📱 Mobile App**: Voters log in, verify identity with OTP, and cast votes.
-- **💻 Web App**: Admins manage elections, candidates, voter data, and view live results.
+- **📱 Voter mobile app** (`MobileApp/`, React Native + Expo + TypeScript): voters log in with their NIC and a 6-digit code emailed to them, then cast up to **3 votes** for candidates in their constituency during the election's voting hours. Everything on screen updates live.
+- **💻 Admin web app** (`Admin_App/election-admin-app/`, React + Vite): live dashboard with turnout and leaderboard; manage elections, candidates and voters; live results.
+- *(Legacy)* `Mobile_App/` is the previous native Java Android app, kept for reference; the React Native app replaces it.
+- **☁️ Cloud Functions** (`functions/`, Node 22): send/verify login codes and record votes. All voting rules are enforced here, not in the app.
 
----
+```
+Voter app ──requestOtp / verifyOtp──▶ Cloud Functions ──▶ Brevo (OTP email)
+     │              ◀── custom token ──┘      │
+     ├──castVote────────────────────────────▶ │ (transaction: window, constituency,
+     │                                         │  duplicate & 3-vote checks)
+     └──reads (rules-restricted)──▶ Firestore ◀── Admin web app (admins only)
+```
 
-## ✅ Features
+## Features
 
-### 📱 Mobile App
-- **Login with NIC**: Start the voting process using your National Identity Card number.
-- **OTP Verification**: Receive an OTP via email for authentication.
-- **Cast Votes**: Choose from a list of candidates and cast up to 3 votes.
-- **Voting Timer**: Voting is only available between defined hours (e.g., 9 AM to 4 PM).
-- **Notifications**: Real-time updates on vote status and remaining voting time.
-- **Vote Limit**: One user can cast a maximum of three votes.
+| | |
+|---|---|
+| Login | NIC → one-time 6-digit code emailed to the voter (5 min expiry, 5 attempts, 1/min resend) |
+| Voting | Up to 3 votes per voter per election, one per candidate, own constituency only; confirmation before each vote |
+| Voting hours | Per election (default 09:00–16:00), interpreted in **Asia/Colombo** time |
+| Results | Live per-candidate counts, ranking and percentages, filter by district / constituency |
+| Real time | Both apps use Firestore listeners: edits in the admin panel (names, photos, elections) and new votes appear on phones within seconds |
+| Admin | Elections (with voting hours), candidates (photo + party symbol), voters, results |
 
-### 💻 Web App
-- **Election Management**: Admins can create elections, define timings, and add candidates.
-- **User Monitoring**: View voters, their voting status, and verify their activity.
-- **Live Results**: Monitor real-time vote counts and participation statistics.
-- **Reports**: Export reports on votes cast, voter activity, and election outcomes.
+## Repository layout
 
----
+```
+firebase.json            Firebase config (Firestore rules, functions, hosting, emulators)
+firestore.rules          Security rules
+functions/               Cloud Functions (requestOtp, verifyOtp, castVote) + tests
+Admin_App/election-admin-app/   React admin panel (Vite)
+MobileApp/               Voter app (React Native 0.88, Expo SDK 58, Expo Router, TypeScript)
+Mobile_App/              Legacy native Android app (Java) — superseded by MobileApp/
+```
 
-## ⚙️ Requirements
+## Firestore data model
 
-### Mobile App
-- Android SDK 4.0 or above
-- Firebase Authentication & Firestore
-- Gmail SMTP (for OTP emails)
-- Internet connection
+| Collection | Written by | Notes |
+|---|---|---|
+| `elections` | admin | `name` (unique), `date` (`YYYY-MM-DD`), `startTime`, `endTime` (`HH:mm`) |
+| `candidates` | admin (+ `votes` counter by `castVote`) | `candidateId`, `candidateName`, `candidateParty`, `district`, `constituency`, `electionName`, base64 images |
+| `voters` | admin | `nic` (unique, upper-case), `name`, `email`, `address`, `district`, `constituency` |
+| `results` | `castVote` only | One ballot per vote, id `<electionId>_<voterId>_<candidateDocId>` |
+| `voterVotes` | `castVote` only | Per-voter tally, id `<electionId>_<voterId>` |
+| `otps` | functions only | Hashed login codes |
+| `admins` | Firebase console only | A document `admins/<uid>` makes that account an admin |
 
-### Web App
-- React.js (Frontend)
-- Node.js + Express (Backend)
-- MongoDB or Firebase (Database)
-- SMTP service (e.g., Gmail or SendGrid)
+## Setup
 
----
+### Prerequisites
 
-## 🚀 Setup Instructions
+- Node.js 22, Firebase CLI (`npm i -g firebase-tools`)
+- Android Studio (or JDK 17+ and the Android SDK, platform 36)
+- The Firebase project on the **Blaze plan** (Cloud Functions and outbound email require it)
 
-### 1️⃣ Clone the Repository
+### 1. Firebase project (`electionnew-app`)
+
+1. **Authentication → Sign-in method:** enable **Email/Password** (for admins).
+2. **Create an admin:** add a user in *Authentication → Users*, copy its UID, then in *Firestore* create a document `admins/<that UID>` (any content, e.g. `{ "email": "…" }`).
+3. **Allow custom tokens:** in Google Cloud Console → IAM, give the Cloud Functions runtime service account (`<project-number>-compute@developer.gserviceaccount.com`) the **Service Account Token Creator** role. `verifyOtp` needs it to sign voters in.
+
+### 2. Cloud Functions
+
 ```bash
-git clone https://github.com/yourusername/election-voting-system.git
-2️⃣ Install Web App Dependencies
-bash
-Copy
-Edit
-cd web-app
+cd functions
 npm install
-3️⃣ Set Up the Mobile App
-Open the project in Android Studio
+npm test                                       # unit tests
 
-Sync Gradle to install dependencies
+# Brevo API key used to email login codes (Brevo → SMTP & API → API keys).
+firebase functions:secrets:set BREVO_API_KEY
+# Sender: synccertsolution@gmail.com by default (must be a verified sender in Brevo).
+# To change it, add EMAIL_SENDER=... / EMAIL_SENDER_NAME=... to functions/.env
 
-4️⃣ Configure Firebase (Mobile)
-Go to Firebase Console
+cd ..
+firebase deploy --only functions,firestore:rules
+```
 
-Create or use an existing Firebase project
+Functions are deployed to `asia-south1`. If you change the region, update `FUNCTIONS_REGION` in `Mobile_App/.../Session.java`.
 
-Add Firebase Authentication and Firestore
+### 3. Admin web app
 
-Download google-services.json and place it in the app/ directory
+```bash
+cd Admin_App/election-admin-app
+cp .env.example .env.local        # fill in the web app config from Firebase console
+npm install
+npm run dev                       # http://localhost:3000
+npm run build                     # production build in dist/
+firebase deploy --only hosting    # optional: host it on Firebase Hosting
+```
 
-Enable Email/Password in Firebase Authentication
+### 4. Voter mobile app (React Native)
 
-5️⃣ Set Up Gmail SMTP (Mobile OTP)
-Visit Google App Passwords
+```bash
+cd MobileApp
+cp .env.example .env.local        # Firebase web config; EXPO_PUBLIC_USE_EMULATORS=false for production
+npm install
+npx expo run:android              # builds the native app and starts Metro
+# or, for an installable build in the cloud: npx eas-cli@latest build -p android
+```
 
-Generate an app password
+Checks: `npx tsc --noEmit` and `npx expo lint`.
 
-Replace credentials in VLogingActivity.java for sending OTP
+## Local testing with emulators and fake data
 
-6️⃣ Configure Web App
-Set up Node.js and Express backend
+Everything can run locally against the Firebase emulators (needs Java 21+), with no deployment or real email:
 
-Use a service like SendGrid for sending OTPs
+```bash
+# 1. functions/.secret.local (git-ignored) must exist:
+#      BREVO_API_KEY=xkeysib-...      (any value works if you don't send real email locally)
+#    Optional, functions/.env.local (git-ignored): EMULATOR_SEND_EMAIL=true to really email codes
+#    via Brevo from the emulator — only for voters with real addresses (fake voters use example.com).
+firebase emulators:start --project electionnew-app --only auth,firestore,functions
 
-Connect MongoDB or Firebase for storing election data
+# 2. Load fake elections, voters, candidates and an admin (only works against emulators)
+cd functions && npm run seed
 
-7️⃣ Customize Mobile Resources
-Edit strings.xml, themes, and layouts in res/ for your branding
+# 3. Admin web app against the emulators → http://localhost:3000
+cd Admin_App/election-admin-app && npm run dev:emulators
 
-📲 Usage Guide
-Mobile App
-Login: Enter NIC number
+# 4. Voter app against the emulators: set EXPO_PUBLIC_USE_EMULATORS=true in MobileApp/.env.local
+cd MobileApp && npx expo run:android          # Android emulator reaches the host at 10.0.2.2
+```
 
-OTP Verification: Check your email and input OTP
+| Fake data | |
+|---|---|
+| Admin | `admin@example.com` / `Admin@123` |
+| Voters (NIC) | `199012345678` Amal (Colombo North), `856789012V` Nimali (Colombo North), `199834567890` Kasun (Colombo North), `927654321V` Dilani (Kandy Central), `200145678901` Ruwan (Kandy Central), `199556781234` Sanduni (Galle Town) |
+| Elections | Parliamentary Election 2026 (today, open all day), Provincial Council Election 2025 (closed, with past results), Local Government Election 2027 (upcoming) |
+| OTP | Not emailed under the emulator: it is printed in the emulator log as `[EMULATOR] OTP for NIC … : 123456` |
 
-Voting: Select candidates (up to 3 votes)
+Emulator mode is opt-in: the admin app uses it only with `npm run dev:emulators`, and the voter app only when `EXPO_PUBLIC_USE_EMULATORS=true`.
 
-Confirmation: Receive confirmation and timer update
+**Low-memory machines (≤16 GB):** the Android emulator, a first native build and VS Code's Java extension together can exhaust RAM. Build first (`cd MobileApp/android && ./gradlew assembleDebug -PreactNativeArchitectures=x86_64`), then start the emulator. `.vscode/settings.json` excludes `MobileApp/android` from the Java extension's Gradle import for the same reason.
 
-Web App
-Admin Login
+## Security notes
 
-Create Election: Add candidates, schedule times
+- No credentials live in the apps. The Brevo API key is a Cloud Functions secret (never in git).
+- Voters can read only their own voter record and tally. Ballots can't be written by any client, including admins.
+- The Firebase web config in `.env.local` / `google-services.json` is not secret; access is controlled by `firestore.rules`.
 
-Track Voters: View voting activity and send OTPs
+## Upgrading from v1
 
-View Results: Real-time vote counts and download reports
-
-🏗️ Architecture
-📱 Mobile App - MVC Pattern
-Model: Firebase Firestore (Users, Votes, Candidates)
-
-View: Android XML layouts
-
-Controller: Java Activities (login, OTP, vote logic)
-
-💻 Web App - MERN Stack
-Frontend: React.js
-
-Backend: Node.js + Express
-
-Database: MongoDB or Firebase
-
-🗂️ File Structure
-📱 Mobile App
-swift
-Copy
-Edit
-app/
-└── src/
-    └── main/
-        ├── java/com/example/electionapp/
-        │   ├── VLogingActivity.java
-        │   ├── OTPActivity.java
-        │   └── VotingActivity.java
-        └── res/layout/
-            ├── activity_vloging.xml
-            ├── activity_otpactivity.xml
-            └── activity_voting.xml
-💻 Web App
-css
-Copy
-Edit
-web-app/
-├── backend/
-│   ├── models/
-│   │   ├── Election.js
-│   │   └── Voter.js
-│   ├── routes/
-│   │   ├── electionRoutes.js
-│   │   └── voterRoutes.js
-│   └── server.js
-└── frontend/
-    └── src/
-        ├── components/
-        │   ├── ElectionDashboard.js
-        │   └── VoterList.js
-        └── App.js
-🤝 Contributing
-We welcome contributions! To contribute:
-
-Fork the repository
-
-Create a new branch (git checkout -b feature-name)
-
-Commit your changes (git commit -m 'Add feature')
-
-Push to the branch (git push origin feature-name)
-
-Open a Pull Request
-
-📄 License
-This project is licensed under the MIT License. See LICENSE.md for more details.
-
-🙌 Acknowledgements
-Firebase Documentation
-
-Gmail SMTP Guide
-
-React Documentation
-
-Node.js Documentation
-
-vbnet
-Copy
-Edit
+- v1 Android builds sent email and wrote votes directly. They **stop working** once the new rules are deployed, so install the new APK.
+- Admins must be added to `admins/` before they can log in to the new admin panel.
+- Ballots cast with v1 still show in the admin **Results** page (it counts `results` documents). The Android results screen uses the `candidates.votes` counter, which only counts votes cast through `castVote`.

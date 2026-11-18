@@ -1,8 +1,5 @@
 package com.example.electionapp;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,26 +36,8 @@ public class ElectionResultAdapter extends RecyclerView.Adapter<ElectionResultAd
         holder.tvDistrict.setText(result.getDistrict());
         holder.tvVoteCount.setText(String.valueOf(result.getVoteCount()));
 
-        // Convert Base64 to images
-        try {
-            // Candidate Photo
-            if (result.getPhotoBase64() != null && !result.getPhotoBase64().isEmpty()) {
-                String base64Image = result.getPhotoBase64().split(",")[1];
-                byte[] decodedString = Base64.decode(base64Image, Base64.DEFAULT);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                holder.ivCandidatePhoto.setImageBitmap(bitmap);
-            }
-
-            // Party Symbol
-            if (result.getPartySymbolBase64() != null && !result.getPartySymbolBase64().isEmpty()) {
-                String base64Symbol = result.getPartySymbolBase64().split(",")[1];
-                byte[] decodedString = Base64.decode(base64Symbol, Base64.DEFAULT);
-                Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                holder.ivPartySymbol.setImageBitmap(bitmap);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ImageUtils.bind(holder.ivCandidatePhoto, result.getPhotoBase64());
+        ImageUtils.bind(holder.ivPartySymbol, result.getPartySymbolBase64());
     }
 
     @Override

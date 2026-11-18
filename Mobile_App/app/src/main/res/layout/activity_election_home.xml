@@ -34,6 +34,19 @@
         app:layout_constraintStart_toEndOf="@+id/imageViewLogo"
         app:layout_constraintTop_toTopOf="@+id/imageViewLogo" />
 
+    <ImageButton
+        android:id="@+id/buttonLogout"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/logout"
+        android:src="@drawable/baseline_exit_to_app_24"
+        app:tint="@color/purple"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewLogo"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewLogo" />
+
     <!-- Welcome Message -->
     <TextView
         android:id="@+id/textViewGreeting"
@@ -66,8 +79,8 @@
     <!-- RecyclerView for Election List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewElections"
-        android:layout_width="372dp"
-        android:layout_height="496dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:clipToPadding="false"
